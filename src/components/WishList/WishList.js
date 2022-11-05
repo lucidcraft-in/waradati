@@ -1,9 +1,44 @@
-import React from 'react'
-
+import React,{useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import {wishlIstListByUser,removeWishList} from '../../actions/wishlistAction'
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 
-export default function WishList() {
+export default function WishList({history}) {
+  const dispatch = useDispatch()
+  const wishListlist = useSelector((state) => state.wishlists)
+
+  const { loading, error, wishlists } = wishListlist;
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = removeWishList
+
+
+
+  useEffect(() => {
+
+
+    if (!userInfo || !userInfo.isAdmin) {
+      history.push('/login')
+    }
+
+      dispatch(wishlIstListByUser(''))
+   
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    successDelete,
+
+   
+   
+])
   return (
     <div>
       {' '}
