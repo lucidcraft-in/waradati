@@ -438,6 +438,9 @@ const NavBar = () => {
                           <li>
                             <Link to="/wishlist">Wishlist</Link>
                           </li>
+                          <li>
+                            <Link to="/login">Logout</Link>
+                          </li>
                         </ul>
                       </div>
                       <div class="header_account-list header_wishlist">
@@ -557,7 +560,9 @@ const NavBar = () => {
                       <ul>
                         {homePageCategories?.map((category) => (
                           <li class="menu_item_children">
-                            <Link to="/category">
+                            <Link
+                              to={`/category/product/${category.categoryId}`}
+                            >
                               {category.categoryName}
                               {category?.subCategory?.length > 0 ? (
                                 <i class="fa fa-angle-right"></i>
