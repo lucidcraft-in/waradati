@@ -30,8 +30,7 @@ export const wishlIstListByUser = (id) => async (dispatch, getState) => {
     const { data } = await Axios.get(`/api/wishlist/${id}`, config);
    
     dispatch({ type: WISHlIST_SUCCESS, payload: data });
-    console.log("inside action");
-    console.log(data);
+   
   } catch (error) {
     dispatch({
       type: WISHLIST_FAIL,

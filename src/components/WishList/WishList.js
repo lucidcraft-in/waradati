@@ -23,9 +23,8 @@ export default function WishList({ history }) {
     success: success,
   } = wishListDelete
 
-  
-  console.log("check suus");
-  console.log(success);
+
+  let arrayLength
   useEffect(() => {
 
     console.log(userInfo);
@@ -37,9 +36,11 @@ export default function WishList({ history }) {
     if (success) {
       navigate('/wishlist');
     }
-
+ 
       dispatch(wishlIstListByUser(userInfo._id))
-
+      console.log(wishlists);
+    console.log(wishlists.length);
+     arrayLength = wishlists.length;
   }, [
     dispatch,
     history,
@@ -96,7 +97,7 @@ export default function WishList({ history }) {
                                         </tr>
                                     </thead>
                       <tbody>
-                        {wishlists?.map((wishlist) => (
+                        {wishlists.length > 0 ? wishlists.map((wishlist) => (
                            <tr>
                            <td class="product_remove"><a  onClick={() => deleteHandler(wishlist._id)}>X</a></td>
                            <td class="product_thumb"><a href="#"><img  src={`${process.env.REACT_APP_API_URL}/${wishlist.items[0].images[0].url}`}
@@ -109,7 +110,9 @@ export default function WishList({ history }) {
 
                        </tr>
                           
-                        ))}
+                        )) : (<div>
+                            <p>No data available</p>
+                        </div>)}
                                        
 
                                        

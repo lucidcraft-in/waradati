@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userActions'
-import { useNavigate  } from "react-router-dom";
+import { useNavigate,Link  } from "react-router-dom";
 const Login = ({ location }) => {  
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -44,7 +44,12 @@ const Login = ({ location }) => {
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </p>
                   <div class="login_submit">
-                    <a href="#">Lost your password?</a>
+                 
+                   
+                        <Link to="/signup">
+                        <button  >Sign up</button>
+                        </Link>
+                    
                     <label for="remember">
                       <input id="remember" type="checkbox" />
                       Remember me
