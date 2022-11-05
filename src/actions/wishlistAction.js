@@ -1,4 +1,5 @@
 import { Form } from 'react-router-dom';
+
 import Axios from '../axios/axios';
 import {
   WISHLIST_REQUEST,
@@ -12,11 +13,25 @@ import {
   WISHLIST_REMOVE_FAIL,
 } from '../constants/constant.js';
 import { logout } from './userActions'
-export const wishlIstListByUser = (id) => async (dispatch) => {
+export const wishlIstListByUser = (id) => async (dispatch, getState) => {
+
   try {
     dispatch({ type: WISHLIST_REQUEST });
-    const { data } = await Axios.get(`/api/wishlist/${id}`);
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+   
+    const { data } = await Axios.get(`/api/wishlist/${id}`, config);
+   
     dispatch({ type: WISHlIST_SUCCESS, payload: data });
+    console.log("inside action");
+    console.log(data);
   } catch (error) {
     dispatch({
       type: WISHLIST_FAIL,
@@ -59,6 +74,7 @@ export const addWishList = (wishList) => async (dispatch, getState) => {
 };
 
 export const removeWishList = (id) => async (dispatch, getState) => {
+ 
   try {
     dispatch({ type: WISHLIST_REMOVE_REQUEST });
 
@@ -74,6 +90,7 @@ export const removeWishList = (id) => async (dispatch, getState) => {
 
     await Axios.delete(`/api/wishlist/${id}`, config);
     dispatch({ type: WISHLIST_REMOVE_SUCCESS });
+    
   } catch (error) {
       
     const message =
