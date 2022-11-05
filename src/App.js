@@ -11,7 +11,9 @@ import Checkout from './components/Cart/Checkout';
 import WishList from './components/WishList/WishList';
 import Account from './components/Account/Account';
 import Categories from './components/Category/Categories';
-// import Categories from './components/Category/Categories';
+import ProductByCategoryList from './components/Products/ProductByCategoryList';
+import Login from './components/Auth/Login';
+import SignUp from './components/Auth/SignUp';
 
 function App() {
   return (
@@ -27,6 +29,13 @@ function App() {
           <Route exact path="/wishlist" element={<WishList />}></Route>
           <Route exact path="/account" element={<Account />}></Route>
           <Route exact path="/categories" element={<Categories />}></Route>
+          <Route
+            exact
+            path="/category/product/:id"
+            element={<ProductByCategoryList />}
+          ></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<SignUp />}></Route>
         </Routes>
       </Router>
     </>
