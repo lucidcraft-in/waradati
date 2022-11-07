@@ -44,7 +44,7 @@ export const wishlIstListByUser = (id) => async (dispatch, getState) => {
 
 export const addWishList = (wishList) => async (dispatch, getState) => {
   try {
-    dispatch({ WISHLIST_CREATE_REQUEST });
+    dispatch({type: WISHLIST_CREATE_REQUEST });
     const {
       userLogin: { userInfo },
     } = getState();

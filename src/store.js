@@ -16,7 +16,8 @@ import {
   userDetailsReducer,
 
 } from './reducers/userReducers'
-import {wishListReducer,wishlistCreateReducer,wishListDeleteReducer,}from './reducers/wishListReducers'
+import { wishListReducer, wishlistCreateReducer, wishListDeleteReducer, } from './reducers/wishListReducers'
+import { cartListReducer, cartCreateReducer, cartDeleteReducer, } from './reducers/cartReducers';
 
 const reducer = combineReducers({
   homePageCategory: homePageCategoryListReducer,
@@ -27,7 +28,10 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   wishlists: wishListReducer,
   wishLishCreate: wishlistCreateReducer,
-  wishListDelete:wishListDeleteReducer,
+  wishListDelete: wishListDeleteReducer,
+  cartLists: cartListReducer,
+  cartCreate: cartCreateReducer,
+  cartDelete:cartDeleteReducer,
 });
  
 

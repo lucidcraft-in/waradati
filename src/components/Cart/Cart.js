@@ -1,10 +1,60 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { cartListByUser, removeCart, } from '../../actions/cartActions';
 import { Link } from 'react-router-dom';
- 
+import { useNavigate  } from "react-router-dom";
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 
-export default function Cart() {
+
+export default function Cart({ history }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const cartList = useSelector((state) => state.cartLists);
+  const { loading, error, cartLists } = cartList;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+  const [quantity, setQuantity] = useState(0);
+  const cartDelete = useSelector((state) => state.cartDelete)
+
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: success,
+  } = cartDelete
+
+  useEffect(() => {
+
+   
+    if (!userInfo) {
+    
+      navigate('/login');
+    }
+
+    if (success) {
+      navigate('/cart');
+    }
+ 
+      dispatch(cartListByUser(userInfo._id))
+
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    success
+   
+  ])
+  const deleteHandler = (id,itemId) => {
+
+    if (window.confirm('Are you sure')) {
+      dispatch(removeCart({id,itemId}))
+  
+      
+    }
+    
+   
+  }
   return (
     <div>
       {' '}
@@ -44,79 +94,37 @@ export default function Cart() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i class="fa fa-trash-o"></i>
-                            </a>
-                          </td>
-                          <td class="product_thumb">
-                            <a href="#">
-                              <img
-                                src="assets/img/s-product/product.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </td>
-                          <td class="product_name">
-                            <a href="#">Handbag fringilla</a>
-                          </td>
-                          <td class="product-price">£65.00</td>
-                          <td class="product_quantity">
-                            <label>Quantity</label>{' '}
-                            <input min="1" max="100" value="1" type="number" />
-                          </td>
-                          <td class="product_total">£130.00</td>
-                        </tr>
-
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i class="fa fa-trash-o"></i>
-                            </a>
-                          </td>
-                          <td class="product_thumb">
-                            <a href="#">
-                              <img
-                                src="assets/img/s-product/product2.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </td>
-                          <td class="product_name">
-                            <a href="#">Handbags justo</a>
-                          </td>
-                          <td class="product-price">£90.00</td>
-                          <td class="product_quantity">
-                            <label>Quantity</label>{' '}
-                            <input min="1" max="100" value="1" type="number" />
-                          </td>
-                          <td class="product_total">£180.00</td>
-                        </tr>
-                        <tr>
-                          <td class="product_remove">
-                            <a href="#">
-                              <i class="fa fa-trash-o"></i>
-                            </a>
-                          </td>
-                          <td class="product_thumb">
-                            <a href="#">
-                              <img
-                                src="assets/img/s-product/product3.jpg"
-                                alt=""
-                              />
-                            </a>
-                          </td>
-                          <td class="product_name">
-                            <a href="#">Handbag elit</a>
-                          </td>
-                          <td class="product-price">£80.00</td>
-                          <td class="product_quantity">
-                            <label>Quantity</label>{' '}
-                            <input min="1" max="100" value="1" type="number" />
-                          </td>
-                          <td class="product_total">£160.00</td>
-                        </tr>
+                        { cartLists.item?.length>0? cartLists.item?.map((cart) => (
+                           <tr>
+                           <td class="product_remove">
+                             <a href="#">
+                               <i class="fa fa-trash-o" onClick={() => deleteHandler(cartLists._id, cart.itemId)}></i>
+                             </a>
+                           </td>
+                           <td class="product_thumb">
+                             <a href="#">
+                               <img
+                                 src={`${process.env.REACT_APP_API_URL}/${cart.image}`}
+                                 alt=""
+                               />
+                             </a>
+                           </td>
+                           <td class="product_name">
+                              <a href="#">{ cart.itemName}</a>
+                           </td>
+                           <td class="product-price">AED {cart.sellingPrice}</td>
+                           <td class="product_quantity">
+                             <label>Quantity</label>{' '}
+                             <input min="1" max="100" value={cart.quantity} type="number" onChange={(e) => setQuantity(e.target.value)}/>
+                           </td>
+                            <td class="product_total">AED { cart.sellingPrice* cart.quantity}</td>
+                         </tr>
+ 
+              
+                        )) : (<div>
+                            <p>No data</p>
+                        </div>)}
+                       
                       </tbody>
                     </table>
                   </div>
