@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-  import {  useParams } from 'react-router-dom';
+  import { useParams, useNavigate } from 'react-router-dom';
 
  import NavBar from '../Layout/NavBar';
  import Breadcrumb from '../Common/Breadcrumb';
@@ -15,26 +15,51 @@ import ProductFilter from '../Products/ProductFilter';
 const ProductByCategoryList = () => {
 
   const dispatch = useDispatch();
-    //  let history = useHistory();
+    const navigate = useNavigate();
   const { id } = useParams();
   
-  const [priceRange, setPriceRange] =useState('')
+  const [priceRange, setPriceRange] = useState('')
+  const [priceSort, setPriceSort] = useState('');
 
    const productList = useSelector((state) => state.productList);
    const { loading, error, products } = productList;
 
     useEffect(() => {
       dispatch(listProductsCategory(id));
-      setToUrl()
-    }, [priceRange]);
+      if (priceRange || priceSort) setToUrl();
+    }, [priceRange, priceSort]);
   
   let allProducts = products?.map((product) => <Product product={product} />);
 
   
 
   const setToUrl = () => {
-    // history.push('/dresses?color=blue');
+    let result = '?';
+
+    if (priceRange) {
+   
+      let text = `&price_range=${priceRange}`;
+       result = result.concat(text);
+    }
+
+    
+    if (priceSort) {
+      let text = `&sort=${priceSort}`;
+      result = result.concat(text);
+    }
+
+      navigate(result);
+ 
+ 
+          dispatch(listProductsCategory(`${id}${result}`));
   }
+
+  const clearFilter = () => {
+    let result = '';
+     navigate(result);
+  }
+
+   
   
   return (
     <div>
@@ -73,15 +98,14 @@ const ProductByCategoryList = () => {
                 </div>
                 <div class=" niceselect_option">
                   <form class="select_option" action="#">
-                    <select name="orderby" id="short" className="form-select">
-                      <option selected value="1">
-                        Sort by average rating
-                      </option>
-                      <option value="2">Sort by popularity</option>
-                      <option value="3">Sort by newness</option>
-                      <option value="4">Sort by price: low to high</option>
-                      <option value="5">Sort by price: high to low</option>
-                      <option value="6">Product Name: Z</option>
+                    <select
+                      name="orderby"
+                      className="form-select"
+                      onChange={(e) => setPriceSort(e.target.value)}
+                    >
+                      <option value="">Sort</option>
+                      <option value="asc">Sort by price: low to high</option>
+                      <option value="dec">Sort by price: high to low</option>
                     </select>
                   </form>
                 </div>
@@ -112,7 +136,10 @@ const ProductByCategoryList = () => {
                 </div>
               </div>
             </div>
-            <ProductFilter setPriceRange={setPriceRange} />
+            <ProductFilter
+              setPriceRange={setPriceRange}
+              clearFilter={clearFilter}
+            />
           </div>
         </div>
       </div>

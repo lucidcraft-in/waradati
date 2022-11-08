@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProductFilter({ setPriceRange }) {
+export default function ProductFilter({ setPriceRange, clearFilter }) {
   return (
     <div class="col-lg-3 col-md-12">
       <aside class="sidebar_widget">
@@ -70,7 +70,13 @@ export default function ProductFilter({ setPriceRange }) {
               </li>
             </ul>
           </div>
-
+          <div class="widget_list widget_filter">
+            <form>
+              <div id="slider-range"></div>
+              <button onClick={(e) => clearFilter()}>Clear</button>
+              <input type="text" name="text" id="amount" />
+            </form>
+          </div>
           <div class="widget_list">
             <h3>Compare</h3>
             <div class="shop_sidebar_product">
