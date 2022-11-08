@@ -18,6 +18,10 @@ import {
 } from './reducers/userReducers'
 import { wishListReducer, wishlistCreateReducer, wishListDeleteReducer, } from './reducers/wishListReducers'
 import { cartListReducer, cartCreateReducer, cartDeleteReducer, } from './reducers/cartReducers';
+import {
+  orderListReducer,
+} from './reducers/orderReducers';
+import { addressListReducers, addressCreateReducer, addressRemoveReducer } from './reducers/addressReducers';
 
 const reducer = combineReducers({
   homePageCategory: homePageCategoryListReducer,
@@ -31,7 +35,11 @@ const reducer = combineReducers({
   wishListDelete: wishListDeleteReducer,
   cartLists: cartListReducer,
   cartCreate: cartCreateReducer,
-  cartDelete:cartDeleteReducer,
+  cartDelete: cartDeleteReducer,
+  orderLists: orderListReducer,
+  addressLists: addressListReducers,
+  addressCreate: addressCreateReducer,
+  addressDelete:addressRemoveReducer,
 });
  
 

@@ -1,9 +1,38 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { orderListByUSer } from '../../actions/orderActions';
+import { addressListByUser } from '../../actions/addressAction';
+import { useNavigate, Link } from 'react-router-dom';
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 
-export default function Account() {
+export default function Account({ history }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const orderList = useSelector((state) => state.orderLists);
+
+  const addressList = useSelector((state) => state.addressLists);
+
+  const { loading, error, orderLists } = orderList;
+
+  const { addressLists } = addressList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+ 
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login');
+    }
+
+    // if (success) {
+    //   navigate('/cart');
+    // }
+
+    dispatch(orderListByUSer(userInfo._id));
+    dispatch(addressListByUser(userInfo._id));
+  }, [dispatch, history, userInfo]);
   return (
     <div>
       {' '}
@@ -102,30 +131,37 @@ export default function Account() {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>1</td>
-                            <td>May 10, 2018</td>
-                            <td>
-                              <span class="success">Completed</span>
-                            </td>
-                            <td>$25.00 for 1 item </td>
-                            <td>
-                              <a href="cart.html" class="view">
-                                view
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>May 10, 2018</td>
-                            <td>Processing</td>
-                            <td>$17.00 for 1 item </td>
-                            <td>
-                              <a href="cart.html" class="view">
-                                view
-                              </a>
-                            </td>
-                          </tr>
+                          {orderLists.map((order, index) => (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>
+                                {new Date(order.updatedDate).toLocaleString(
+                                  'en-US',
+                                  {
+                                    month: 'short',
+                                    day: '2-digit',
+                                    year: 'numeric',
+                                  }
+                                )}
+                              </td>
+                              <td>
+                                <span class="success">
+                                  {order.isDelivered === true
+                                    ? ' Completed'
+                                    : ' Processing'}{' '}
+                                </span>
+                              </td>
+                              <td>
+                                AED {order.data.totalAmount} for{' '}
+                                {order.data.quantity} item{' '}
+                              </td>
+                              <td>
+                                <a href="cart.html" class="view">
+                                  view
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
@@ -175,32 +211,88 @@ export default function Account() {
                       by default.
                     </p>
                     <h4 class="billing-address">Billing address</h4>
-                    <a href="#" class="view">
-                      Edit
-                    </a>
-                    <p>
-                      <strong>Bobby Jackson</strong>
-                    </p>
-                    <address>
-                      <span>
-                        <strong>City:</strong> Seattle
-                      </span>
-                      ,
-                      <br />
-                      <span>
-                        <strong>State:</strong> Washington(WA)
-                      </span>
-                      ,
-                      <br />
-                      <span>
-                        <strong>ZIP:</strong> 98101
-                      </span>
-                      ,
-                      <br />
-                      <span>
-                        <strong>Country:</strong> USA
-                      </span>
-                    </address>
+                    {addressLists.billingAddress?.map((billAddress) => (
+                      <div>
+                        <a href="#" class="view">
+                          Edit
+                        </a>
+                        <p>
+                          <strong>
+                            {billAddress.firstName} {billAddress.lastName}
+                          </strong>
+                        </p>
+                        <address>
+                          <span>
+                            <strong>Address:</strong> {billAddress.address1}
+                          </span>
+                          , <br />
+                          <span>
+                            <strong>Appartment:</strong> {billAddress.apartment}
+                          </span>
+                          , <br />
+                          <span>
+                            <strong>City:</strong> {billAddress.city}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>State:</strong> {billAddress.region}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>ZIP:</strong> {billAddress.zip}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>Country:</strong> {billAddress.country}
+                          </span>
+                        </address>
+                      </div>
+                    ))}
+
+                    <h4 class="billing-address">Shipping address</h4>
+                    {addressLists.shippingAddress?.map((shippAddress) => (
+                      <div>
+                        <a href="#" class="view">
+                          Edit
+                        </a>
+                        <p>
+                          <strong>
+                            {shippAddress.firstName} {shippAddress.lastName}
+                          </strong>
+                        </p>
+                        <address>
+                          <span>
+                            <strong>Address:</strong> {shippAddress.address1}
+                          </span>
+                          , <br />
+                          <span>
+                            <strong>Appartment:</strong> {shippAddress.apartment}
+                          </span>
+                          , <br />
+                          <span>
+                            <strong>City:</strong> {shippAddress.city}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>State:</strong> {shippAddress.region}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>ZIP:</strong> {shippAddress.zip}
+                          </span>
+                          ,
+                          <br />
+                          <span>
+                            <strong>Country:</strong> {shippAddress.country}
+                          </span>
+                        </address>
+                      </div>
+                    ))}
                   </div>
 
                   <div class="tab-pane fade" id="account-details">
