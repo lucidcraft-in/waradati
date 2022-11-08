@@ -18,7 +18,7 @@ export const wishListReducer = (state = { wishlists: [] }, action) => {
     case WISHlIST_SUCCESS:
       return {
         loading: false,
-        wishlists: action.payload.wishlists,
+        wishlists: action.payload,
         //   pages: action.payload.pages,
         //   page: action.payload.page,
       };

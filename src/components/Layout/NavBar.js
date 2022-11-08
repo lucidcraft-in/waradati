@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import $ from 'jquery';
 
 import { listCategoriesHomePage } from '../../actions/homePageActions';
-
+import { logout } from '../../actions/userActions';
 const NavBar = () => {
   const dispatch = useDispatch();
   
   const [cartModalActive, setActiveModal] = useState('');
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
        const homePageCategory = useSelector((state) => state.homePageCategory);
        const { loading, error, homePageCategories } = homePageCategory;
@@ -25,7 +28,9 @@ const NavBar = () => {
   }
 
  
-
+  const logoutHandler = () => {   
+    dispatch(logout());
+  };
   
   
     
@@ -420,29 +425,39 @@ const NavBar = () => {
                         </div>
                       </form>
                     </div>
+                   
                     <div class="header_account_area">
-                      <div class="header_account-list top_links">
-                        <a href="#">
-                          <i class="icon-users"></i>
-                        </a>
-                        <ul class="dropdown_links">
-                          <li>
-                            <Link to="/checkout">Checkout </Link>
-                          </li>
-                          <li>
-                            <Link to="/account">My Account </Link>
-                          </li>
-                          <li>
-                            <Link to="/cart">Shopping Cart</Link>
-                          </li>
-                          <li>
-                            <Link to="/wishlist">Wishlist</Link>
-                          </li>
-                          <li>
-                            <Link to="/login">Logout</Link>
-                          </li>
-                        </ul>
-                      </div>
+                      
+                      {userInfo?(<div class="header_account-list top_links">
+                       
+                       <a href="#">
+                         <i class="icon-users"></i>
+                       </a>
+                       <ul class="dropdown_links">
+                         <li>
+                           <Link to="/checkout">Checkout </Link>
+                         </li>
+                         <li>
+                           <Link to="/account">My Account </Link>
+                         </li>
+                         <li>
+                           <Link to="/cart">Shopping Cart</Link>
+                         </li>
+                         <li>
+                           <Link to="/wishlist">Wishlist</Link>
+                         </li>
+                         <li>
+                           {/* to="/login" */}
+                           <Link onClick={logoutHandler} to="" >Logout</Link>
+                         </li>
+                       </ul>
+                      </div>) : (
+                          <div class="header_account-list ">
+                          <Link to="/login">
+                            <i class="icon-login"></i>
+                          </Link>
+                        </div>
+                     )}
                       <div class="header_account-list header_wishlist">
                         <Link to="/wishlist">
                           <i class="icon-heart"></i>

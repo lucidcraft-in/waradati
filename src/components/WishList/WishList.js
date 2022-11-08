@@ -1,9 +1,63 @@
-import React from 'react'
-
+import React,{useEffect} from 'react'
+import { useSelector, useDispatch } from "react-redux";
+import { wishlIstListByUser, removeWishList } from '../../actions/wishlistAction'
+import { useNavigate  } from "react-router-dom";
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 
-export default function WishList() {
+export default function WishList({ history }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const wishListlist = useSelector((state) => state.wishlists)
+
+  const { loading, error, wishlists } = wishListlist;
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const wishListDelete = useSelector((state) => state.wishListDelete)
+
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: success,
+  } = wishListDelete
+
+
+  let arrayLength
+  useEffect(() => {
+
+    console.log(userInfo);
+    if (!userInfo) {
+    
+      navigate('/login');
+    }
+
+    if (success) {
+      navigate('/wishlist');
+    }
+ 
+      dispatch(wishlIstListByUser(userInfo._id))
+      console.log(wishlists);
+    console.log(wishlists.length);
+     arrayLength = wishlists.length;
+  }, [
+    dispatch,
+    history,
+    userInfo,
+    success
+   
+  ])
+  const deleteHandler = (id) => {
+  
+    if (window.confirm('Are you sure')) {
+      dispatch(removeWishList(id))
+  
+      
+    }
+    
+   
+  }
   return (
     <div>
       {' '}
@@ -17,7 +71,7 @@ export default function WishList() {
                   <li>
                     <a href="index.html">home</a>
                   </li>
-                  <li>shop right sidebar</li>
+                  <li>Wish List</li>
                 </ul>
               </div>
             </div>
@@ -42,41 +96,26 @@ export default function WishList() {
                                             <th class="product_total">Add To Cart</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="product_remove"><a href="#">X</a></td>
-                                            <td class="product_thumb"><a href="#"><img
-                                                        src="assets/img/s-product/product.jpg" alt=""/></a></td>
-                                            <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                            <td class="product-price">£65.00</td>
-                                            <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
+                      <tbody>
+                        {wishlists.length > 0 ? wishlists.map((wishlist) => (
+                           <tr>
+                           <td class="product_remove"><a  onClick={() => deleteHandler(wishlist._id)}>X</a></td>
+                           <td class="product_thumb"><a href="#"><img  src={`${process.env.REACT_APP_API_URL}/${wishlist.items[0].images[0].url}`}
+                                      alt=""/></a></td>
+                            <td class="product_name"><a href="#">{ wishlist.items[0].name}</a></td>
+                            <td class="product-price">{ wishlist.items[0].sellingPrice}</td>
+                           <td class="product_quantity">{!wishlist.items[0].stock  ? "In Stock": "Out of Stock"}</td>
+                           <td class="product_total"><a href="#">Add To Cart</a></td>
 
 
-                                        </tr>
+                       </tr>
+                          
+                        )) : (<div>
+                            <p>No data available</p>
+                        </div>)}
+                                       
 
-                                        <tr>
-                                            <td class="product_remove"><a href="#">X</a></td>
-                                            <td class="product_thumb"><a href="#"><img
-                                                        src="assets/img/s-product/product2.jpg" alt=""/></a></td>
-                                            <td class="product_name"><a href="#">Handbags justo</a></td>
-                                            <td class="product-price">£90.00</td>
-                                            <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
-
-
-                                        </tr>
-                                        <tr>
-                                            <td class="product_remove"><a href="#">X</a></td>
-                                            <td class="product_thumb"><a href="#"><img
-                                                        src="assets/img/s-product/product3.jpg" alt=""/></a></td>
-                                            <td class="product_name"><a href="#">Handbag elit</a></td>
-                                            <td class="product-price">£80.00</td>
-                                            <td class="product_quantity">In Stock</td>
-                                            <td class="product_total"><a href="#">Add To Cart</a></td>
-
-
-                                        </tr>
+                                       
 
                                     </tbody>
                                 </table>

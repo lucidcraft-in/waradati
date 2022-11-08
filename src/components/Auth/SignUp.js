@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { register } from '../../actions/userActions'
+import { useNavigate,Link  } from "react-router-dom";
+const SignUp = ({ }) => {  
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
+  const dispatch = useDispatch()
+  
+  const userLogin = useSelector((state) => state.userRegister)
+  const { loading, error, userInfo } = userLogin
 
-export default function SignUp() {
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [userInfo])
+  const submitHandler = (e) => {
+    e.preventDefault()
+    dispatch(register(name,email, password))
+  }
   return (
     <div>
       {' '}
@@ -10,19 +30,25 @@ export default function SignUp() {
             <div class="col-lg-3 col-md-3"></div>
             <div class="col-lg-6 col-md-6">
               <div class="account_form">
-                <h2>login</h2>
-                <form action="#">
+                <h2>Sign up</h2>
+                <form onSubmit={submitHandler}>
                   <p>
                     <label>
-                      Username or email <span>*</span>
+                      Username  <span>*</span>
                     </label>
-                    <input type="text" />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                  </p>
+                  <p>
+                    <label>
+                      email  <span>*</span>
+                    </label>
+                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
                   </p>
                   <p>
                     <label>
                       Passwords <span>*</span>
                     </label>
-                    <input type="password" />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   </p>
                   <div class="login_submit">
                     <a href="#">Lost your password?</a>
@@ -42,3 +68,5 @@ export default function SignUp() {
     </div>
   );
 }
+
+export default SignUp
