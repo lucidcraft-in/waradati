@@ -47,7 +47,8 @@ const ProductDetails = () => {
 
   const addToCart = (e) => {
     
-e.preventDefault();
+    e.preventDefault();
+    
     if (!selectStockItem) return
 
     
