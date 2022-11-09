@@ -1,17 +1,21 @@
 import React, {useState, useEffect} from 'react'
 
 export default function ProductModal({ product }) {
-  const [productData, setProductData] = useState({});
+  const [productData, setProductData] = useState([]);
+   const [images, setImages] = useState([]);
+ 
 
-  useEffect(() => {
-    if (product != undefined) {
-        setProductData(product);
-         console.log(product.product_items);
-    }
-  }, [product]);
+    if (
+      Object.keys(product).length !== 0 &&
+      productData.length === 0 &&
+      product._id
+    ) {
+      setProductData(product.product_items);
+          setImages(product?.product_items[0]?.images[0]);
+    } 
 
-//    console.log(productData?.product_items[0]);
 
+   console.log(product);
   return (
     <div
       class="modal fade"
@@ -45,10 +49,9 @@ export default function ProductModal({ product }) {
                       >
                         <div class="modal_tab_img">
                           <a href="#">
-                            <img
-                              src="assets/img/product/productbig1.jpg"
-                              alt=""
-                            />
+                             <img  src=
+                            {`${process.env.REACT_APP_API_URL}/${images.url}`}/> 
+                           
                           </a>
                         </div>
                       </div>
