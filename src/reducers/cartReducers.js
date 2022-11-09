@@ -11,7 +11,7 @@ import {
     CART_REMOVE_FAIL,
 } from '../constants/cartConstants';
   
-export const cartListReducer = (state = { cartLists: [] }, action) => {
+export const cartListReducer = (state = { cartLists: {} }, action) => {
     
     switch (action.type) {
       case CART_LIST_REQUEST:
