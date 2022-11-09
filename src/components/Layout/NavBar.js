@@ -774,12 +774,14 @@ const NavBar = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">
+                        <Link to={`/about`} >  About Us</Link>
+                          {/* <a href="#">
                             pages <i class="fa fa-angle-down"></i>
-                          </a>
-                          <ul class="sub_menu pages">
+                          </a> */}
+                          {/* <ul class="sub_menu pages">
                             <li>
-                              <a href="about.html">About Us</a>
+                            <Link to={`/about`} >  About Us</Link>
+                            
                             </li>
                             <li>
                               <a href="services.html">services</a>
@@ -796,7 +798,7 @@ const NavBar = () => {
                             <li>
                               <a href="404.html">Error 404</a>
                             </li>
-                          </ul>
+                          </ul> */}
                         </li>
                         <li>
                         <Link to={`/contact`} >  Contact Us</Link>

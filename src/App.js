@@ -16,6 +16,7 @@ import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
 import OrderDetails from './components/Account/OrderDetails'
 import Contact from './components/Home/Contact'
+import AboutUs from './components/Home/AboutUs';
 function App() {
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/account" element={<Account />}></Route>
           <Route exact path="/categories" element={<Categories />}></Route>
           <Route exact path="/contact" element={<Contact />}></Route>
+          <Route exact path="/about" element={<AboutUs />}></Route>
           <Route
             exact
             path="/category/product/:id"
