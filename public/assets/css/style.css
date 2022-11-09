@@ -10741,6 +10741,12 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
   }
 }
 
+
+
+.rating-color {
+ color: '#f8e825' !important;;
+ font-size: "25px" !important;;
+}
 /*privacy policy css end*/
 
 /*# sourceMappingURL=style.css.map */

@@ -9,20 +9,22 @@ import {
  
 } from './reducers/categoryReducers';
 
-import { productListReducer } from './reducers/productReducer';
+import { productListReducer ,productDetailsReducer} from './reducers/productReducer';
 import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
-
-} from './reducers/userReducers'
+  
+} from './reducers/userReducers';
 import { wishListReducer, wishlistCreateReducer, wishListDeleteReducer, } from './reducers/wishListReducers'
 import { cartListReducer, cartCreateReducer, cartDeleteReducer, } from './reducers/cartReducers';
 
 const reducer = combineReducers({
   homePageCategory: homePageCategoryListReducer,
   categoryList: categoryListReducer,
+
   productList: productListReducer,
+ productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
