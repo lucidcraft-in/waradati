@@ -295,7 +295,8 @@ const NavBar = () => {
                           <a href="faq.html">Frequently Questions</a>
                         </li>
                         <li>
-                          <a href="contact.html">contact</a>
+                        <Link to={`/contact`} >  contact</Link>
+                         
                         </li>
                         <li>
                           <a href="login.html">login</a>
@@ -312,7 +313,8 @@ const NavBar = () => {
                       <a href="about.html">about Us</a>
                     </li>
                     <li class="menu-item-has-children">
-                      <a href="contact.html"> Contact Us</a>
+                    <Link to={`/contact`} >  Contact Us</Link>
+            
                     </li>
                   </ul>
                 </div>
@@ -772,12 +774,14 @@ const NavBar = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="#">
+                        <Link to={`/about`} >  About Us</Link>
+                          {/* <a href="#">
                             pages <i class="fa fa-angle-down"></i>
-                          </a>
-                          <ul class="sub_menu pages">
+                          </a> */}
+                          {/* <ul class="sub_menu pages">
                             <li>
-                              <a href="about.html">About Us</a>
+                            <Link to={`/about`} >  About Us</Link>
+                            
                             </li>
                             <li>
                               <a href="services.html">services</a>
@@ -794,10 +798,11 @@ const NavBar = () => {
                             <li>
                               <a href="404.html">Error 404</a>
                             </li>
-                          </ul>
+                          </ul> */}
                         </li>
                         <li>
-                          <a href="contact.html"> Contact Us</a>
+                        <Link to={`/contact`} >  Contact Us</Link>
+                        
                         </li>
                       </ul>
                     </nav>

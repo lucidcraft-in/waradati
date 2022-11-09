@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { orderListByUSer } from '../../actions/orderActions';
 import { addressListByUser } from '../../actions/addressAction';
 import { useNavigate, Link } from 'react-router-dom';
+import { logout } from '../../actions/userActions';
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 
@@ -20,7 +21,7 @@ export default function Account({ history }) {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
- 
+  // console.log(orderLists);
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -33,6 +34,11 @@ export default function Account({ history }) {
     dispatch(orderListByUSer(userInfo._id));
     dispatch(addressListByUser(userInfo._id));
   }, [dispatch, history, userInfo]);
+  
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
   return (
     <div>
       {' '}
@@ -75,33 +81,20 @@ export default function Account({ history }) {
                         Orders
                       </a>
                     </li>
-                    <li>
-                      <a
-                        href="#downloads"
-                        data-bs-toggle="tab"
-                        class="nav-link"
-                      >
-                        Downloads
-                      </a>
-                    </li>
+             
                     <li>
                       <a href="#address" data-bs-toggle="tab" class="nav-link">
                         Addresses
                       </a>
                     </li>
+                  
                     <li>
-                      <a
-                        href="#account-details"
-                        data-bs-toggle="tab"
-                        class="nav-link"
-                      >
-                        Account details
-                      </a>
-                    </li>
-                    <li>
-                      <a href="login.html" class="nav-link">
+                    <Link onClick={logoutHandler} to="" class="nav-link">
+                                Logout
+                              </Link>
+                      {/* <a onClick={logoutHandler} class="nav-link">
                         logout
-                      </a>
+                      </a> */}
                     </li>
                   </ul>
                 </div>
@@ -113,8 +106,7 @@ export default function Account({ history }) {
                     <p>
                       From your account dashboard. you can easily check &amp;
                       view your <a href="#">recent orders</a>, manage your{' '}
-                      <a href="#">shipping and billing addresses</a> and{' '}
-                      <a href="#">Edit your password and account details.</a>
+                      <a href="#">shipping and billing addresses</a> 
                     </p>
                   </div>
                   <div class="tab-pane fade" id="orders">
@@ -156,9 +148,8 @@ export default function Account({ history }) {
                                 {order.data.quantity} item{' '}
                               </td>
                               <td>
-                                <a href="cart.html" class="view">
-                                  view
-                                </a>
+                              <Link to={`/order/${order.orderId}`} class="view">  view</Link>
+                              
                               </td>
                             </tr>
                           ))}
@@ -166,45 +157,7 @@ export default function Account({ history }) {
                       </table>
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="downloads">
-                    <h3>Downloads</h3>
-                    <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>Product</th>
-                            <th>Downloads</th>
-                            <th>Expires</th>
-                            <th>Download</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Shopnovilla - Free Real Estate PSD Template</td>
-                            <td>May 10, 2018</td>
-                            <td>
-                              <span class="danger">Expired</span>
-                            </td>
-                            <td>
-                              <a href="#" class="view">
-                                Click Here To Download Your File
-                              </a>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Organic - ecommerce html template</td>
-                            <td>Sep 11, 2018</td>
-                            <td>Never</td>
-                            <td>
-                              <a href="#" class="view">
-                                Click Here To Download Your File
-                              </a>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
+              
                   <div class="tab-pane" id="address">
                     <p>
                       The following addresses will be used on the checkout page
@@ -296,81 +249,7 @@ export default function Account({ history }) {
                     ))}
                   </div>
 
-                  <div class="tab-pane fade" id="account-details">
-                    <h3>Account details </h3>
-                    <div class="login">
-                      <div class="login_form_container">
-                        <div class="account_login_form">
-                          <form action="#">
-                            <p>
-                              Already have an account?{' '}
-                              <a href="#">Log in instead!</a>
-                            </p>
-                            <div class="input-radio">
-                              <span class="custom-radio">
-                                <input
-                                  type="radio"
-                                  value="1"
-                                  name="id_gender"
-                                />{' '}
-                                Mr.
-                              </span>
-                              <span class="custom-radio">
-                                <input
-                                  type="radio"
-                                  value="1"
-                                  name="id_gender"
-                                />{' '}
-                                Mrs.
-                              </span>
-                            </div>{' '}
-                            <br />
-                            <label>First Name</label>
-                            <input type="text" name="first-name" />
-                            <label>Last Name</label>
-                            <input type="text" name="last-name" />
-                            <label>Email</label>
-                            <input type="text" name="email-name" />
-                            <label>Password</label>
-                            <input type="password" name="user-password" />
-                            <label>Birthdate</label>
-                            <input
-                              type="text"
-                              placeholder="MM/DD/YYYY"
-                              value=""
-                              name="birthday"
-                            />
-                            <span class="example">(E.g.: 05/31/1970)</span>
-                            <br />
-                            <span class="custom_checkbox">
-                              <input type="checkbox" value="1" name="optin" />
-                              <label>Receive offers from our partners</label>
-                            </span>
-                            <br />
-                            <span class="custom_checkbox">
-                              <input
-                                type="checkbox"
-                                value="1"
-                                name="newsletter"
-                              />
-                              <label>
-                                Sign up for our newsletter
-                                <br />
-                                <em>
-                                  You may unsubscribe at any moment. For that
-                                  purpose, please find our contact info in the
-                                  legal notice.
-                                </em>
-                              </label>
-                            </span>
-                            <div class="save_button primary_btn default_button">
-                              <button type="submit">Save</button>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>
