@@ -1,39 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
- import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
 import $ from 'jquery';
 
 import { listCategoriesHomePage } from '../../actions/homePageActions';
+import { cartListByUser, removeCart } from '../../actions/cartActions';
 import { logout } from '../../actions/userActions';
 const NavBar = () => {
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
   const [cartModalActive, setActiveModal] = useState('');
+  const [cartsubTotal, setCartSubTotal] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
+  const cartList = useSelector((state) => state.cartLists);
+  const { cartLists } = cartList;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const homePageCategory = useSelector((state) => state.homePageCategory);
+  const { loading, error, homePageCategories } = homePageCategory;
+  const cartDelete = useSelector((state) => state.cartDelete);
 
-       const homePageCategory = useSelector((state) => state.homePageCategory);
-       const { loading, error, homePageCategories } = homePageCategory;
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: success,
+  } = cartDelete;
 
-    useEffect(() => {
-      dispatch(listCategoriesHomePage(''));
-    }, []);
-     
+  useEffect(() => {
 
-    const setCategoriesModalDisplay = (e) => {
-        e.preventDefault();
-        $(this).toggleClass('active');
-         $('.categories_menu_toggle').slideToggle('medium');
-  }
+    if (success) {
+      navigate('/');
+    }
 
- 
-  const logoutHandler = () => {   
+    dispatch(listCategoriesHomePage(''));
+
+    dispatch(cartListByUser(userInfo._id));
+
+    cartTotalFunc();
+
+  }, [dispatch, success]);
+
+  const setCategoriesModalDisplay = (e) => {
+    e.preventDefault();
+    $(this).toggleClass('active');
+    $('.categories_menu_toggle').slideToggle('medium');
+  };
+
+  const logoutHandler = () => {
     dispatch(logout());
   };
-  
-  
-    
+
+  const cartTotalFunc = () => {
+    let subTotal = 0;
+
+    if (cartLists.item?.length > 0) {
+      cartLists.item.map((cart) => {
+        subTotal = subTotal + cart.quantity * cart.sellingPrice;
+      });
+      setCartSubTotal(subTotal);
+      setCartTotal(subTotal);
+    }
+  };
+  const deleteHandler = (id, itemId) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(removeCart({ id, itemId }));
+    }
+  };
   return (
     <div>
       {' '}
@@ -425,39 +459,41 @@ const NavBar = () => {
                         </div>
                       </form>
                     </div>
-                   
+
                     <div class="header_account_area">
-                      
-                      {userInfo?(<div class="header_account-list top_links">
-                       
-                       <a href="#">
-                         <i class="icon-users"></i>
-                       </a>
-                       <ul class="dropdown_links">
-                         <li>
-                           <Link to="/checkout">Checkout </Link>
-                         </li>
-                         <li>
-                           <Link to="/account">My Account </Link>
-                         </li>
-                         <li>
-                           <Link to="/cart">Shopping Cart</Link>
-                         </li>
-                         <li>
-                           <Link to="/wishlist">Wishlist</Link>
-                         </li>
-                         <li>
-                           {/* to="/login" */}
-                           <Link onClick={logoutHandler} to="" >Logout</Link>
-                         </li>
-                       </ul>
-                      </div>) : (
-                          <div class="header_account-list ">
+                      {userInfo ? (
+                        <div class="header_account-list top_links">
+                          <a href="#">
+                            <i class="icon-users"></i>
+                          </a>
+                          <ul class="dropdown_links">
+                            <li>
+                              <Link to="/checkout">Checkout </Link>
+                            </li>
+                            <li>
+                              <Link to="/account">My Account </Link>
+                            </li>
+                            <li>
+                              <Link to="/cart">Shopping Cart</Link>
+                            </li>
+                            <li>
+                              <Link to="/wishlist">Wishlist</Link>
+                            </li>
+                            <li>
+                              {/* to="/login" */}
+                              <Link onClick={logoutHandler} to="">
+                                Logout
+                              </Link>
+                            </li>
+                          </ul>
+                        </div>
+                      ) : (
+                        <div class="header_account-list ">
                           <Link to="/login">
                             <i class="icon-login"></i>
                           </Link>
                         </div>
-                     )}
+                      )}
                       <div class="header_account-list header_wishlist">
                         <Link to="/wishlist">
                           <i class="icon-heart"></i>
@@ -466,7 +502,7 @@ const NavBar = () => {
                       <div class="header_account-list  mini_cart_wrapper">
                         <a onClick={(e) => setActiveModal('active')}>
                           <i class="icon-shopping-bag"></i>
-                          <span class="item_count">2</span>
+                          <span class="item_count">{cartLists.item?.length > 0 ?cartLists.item?.length:0 }</span>
                         </a>
 
                         <div class={`mini_cart ${cartModalActive}`}>
@@ -481,58 +517,54 @@ const NavBar = () => {
                                 </a>
                               </div>
                             </div>
-                            <div class="cart_item">
-                              <div class="cart_img">
-                                <a href="#">
-                                  <img
-                                    src="assets/img/s-product/product.jpg"
-                                    alt=""
-                                  />
-                                </a>
+                            {cartLists.item?.length > 0 ? (
+                              cartLists.item?.map((cart) => (
+                                <div class="cart_item">
+                                  <div class="cart_img">
+                                    <a href="#">
+                                      <img
+                                        src={`${process.env.REACT_APP_API_URL}/${cart.image}`}
+                                        alt=""
+                                      />
+                                    </a>
+                                  </div>
+                                  <div class="cart_info">
+                                    <a href="#">{cart.itemName}</a>
+                                    <p>
+                                      {cart.quantity} x{' '}
+                                      <span> AED {cart.sellingPrice} </span>
+                                    </p>
+                                  </div>
+                                  <div class="cart_remove">
+                                    <a href="#">
+                                      <i
+                                        class="icon-x"
+                                        onClick={() =>
+                                          deleteHandler(
+                                            cartLists._id,
+                                            cart.itemId
+                                          )
+                                        }
+                                      ></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              ))
+                            ) : (
+                              <div>
+                                <p>Your Cart is Empty</p>
                               </div>
-                              <div class="cart_info">
-                                <a href="#">Primis In Faucibus</a>
-                                <p>
-                                  1 x <span> $65.00 </span>
-                                </p>
-                              </div>
-                              <div class="cart_remove">
-                                <a href="#">
-                                  <i class="icon-x"></i>
-                                </a>
-                              </div>
-                            </div>
-                            <div class="cart_item">
-                              <div class="cart_img">
-                                <a href="#">
-                                  <img
-                                    src="assets/img/s-product/product2.jpg"
-                                    alt=""
-                                  />
-                                </a>
-                              </div>
-                              <div class="cart_info">
-                                <a href="#">Letraset Sheets</a>
-                                <p>
-                                  1 x <span> $60.00 </span>
-                                </p>
-                              </div>
-                              <div class="cart_remove">
-                                <a href="#">
-                                  <i class="icon-x"></i>
-                                </a>
-                              </div>
-                            </div>
+                            )}
                           </div>
                           <div class="mini_cart_table">
                             <div class="cart_table_border">
                               <div class="cart_total">
                                 <span>Sub total:</span>
-                                <span class="price">$125.00</span>
+                                <span class="price">AED {cartsubTotal}</span>
                               </div>
                               <div class="cart_total mt-10">
                                 <span>total:</span>
-                                <span class="price">$125.00</span>
+                                <span class="price">AED {cartTotal}</span>
                               </div>
                             </div>
                           </div>
@@ -785,7 +817,6 @@ const NavBar = () => {
       </header>
     </div>
   );
-}
-
+};
 
 export default NavBar;
