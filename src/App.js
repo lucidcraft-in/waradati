@@ -15,6 +15,7 @@ import ProductByCategoryList from './components/Products/ProductByCategoryList';
 import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
 import OrderDetails from './components/Account/OrderDetails'
+import Contact from './components/Home/Contact'
 function App() {
   return (
     <>
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/wishlist" element={<WishList />}></Route>
           <Route exact path="/account" element={<Account />}></Route>
           <Route exact path="/categories" element={<Categories />}></Route>
+          <Route exact path="/contact" element={<Contact />}></Route>
           <Route
             exact
             path="/category/product/:id"

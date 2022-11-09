@@ -295,7 +295,8 @@ const NavBar = () => {
                           <a href="faq.html">Frequently Questions</a>
                         </li>
                         <li>
-                          <a href="contact.html">contact</a>
+                        <Link to={`/contact`} >  contact</Link>
+                         
                         </li>
                         <li>
                           <a href="login.html">login</a>
@@ -312,7 +313,8 @@ const NavBar = () => {
                       <a href="about.html">about Us</a>
                     </li>
                     <li class="menu-item-has-children">
-                      <a href="contact.html"> Contact Us</a>
+                    <Link to={`/contact`} >  Contact Us</Link>
+            
                     </li>
                   </ul>
                 </div>
@@ -797,7 +799,8 @@ const NavBar = () => {
                           </ul>
                         </li>
                         <li>
-                          <a href="contact.html"> Contact Us</a>
+                        <Link to={`/contact`} >  Contact Us</Link>
+                        
                         </li>
                       </ul>
                     </nav>

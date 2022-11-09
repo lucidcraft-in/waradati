@@ -27,7 +27,8 @@ const OrderDetails = () => {
       <Breadcrumb />
           <div className="row single-order-bg">
               
-      </div>
+          </div>
+          <Footer />
     </div>
   );
 };
