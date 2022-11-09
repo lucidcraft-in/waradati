@@ -21,7 +21,7 @@ export default function Account({ history }) {
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
- 
+  // console.log(orderLists);
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -148,9 +148,8 @@ export default function Account({ history }) {
                                 {order.data.quantity} item{' '}
                               </td>
                               <td>
-                                <a href="cart.html" class="view">
-                                  view
-                                </a>
+                              <Link to={`/order/${order.orderId}`} class="view">  view</Link>
+                              
                               </td>
                             </tr>
                           ))}

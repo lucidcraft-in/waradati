@@ -14,7 +14,7 @@ import Categories from './components/Category/Categories';
 import ProductByCategoryList from './components/Products/ProductByCategoryList';
 import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
-
+import OrderDetails from './components/Account/OrderDetails'
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/products" element={<Products />}></Route>
           <Route exact path="/product/:id" element={<ProductDetails />}></Route>
+          <Route exact path="/order/:id" element={<OrderDetails />}></Route>
           <Route exact path="/cart" element={<Cart />}></Route>
           <Route exact path="/checkout" element={<Checkout />}></Route>
           <Route exact path="/wishlist" element={<WishList />}></Route>

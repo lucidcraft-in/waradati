@@ -19,7 +19,7 @@ import {
 import { wishListReducer, wishlistCreateReducer, wishListDeleteReducer, } from './reducers/wishListReducers'
 import { cartListReducer, cartCreateReducer, cartDeleteReducer, } from './reducers/cartReducers';
 import {
-  orderListReducer,
+  orderListReducer,orderDetailsReducer,
 } from './reducers/orderReducers';
 import { addressListReducers, addressCreateReducer, addressRemoveReducer } from './reducers/addressReducers';
 
@@ -39,6 +39,7 @@ const reducer = combineReducers({
   cartCreate: cartCreateReducer,
   cartDelete: cartDeleteReducer,
   orderLists: orderListReducer,
+  orderDetails:orderDetailsReducer,
   addressLists: addressListReducers,
   addressCreate: addressCreateReducer,
   addressDelete:addressRemoveReducer,
