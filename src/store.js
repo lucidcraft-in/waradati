@@ -18,9 +18,8 @@ import {
 } from './reducers/userReducers';
 import { wishListReducer, wishlistCreateReducer, wishListDeleteReducer, } from './reducers/wishListReducers'
 import { cartListReducer, cartCreateReducer, cartDeleteReducer, } from './reducers/cartReducers';
-import {
-  orderListReducer,orderDetailsReducer,
-} from './reducers/orderReducers';
+import { orderListReducer, orderCreateReducer,orderDetailsReducer } from './reducers/orderReducers';
+ 
 import { addressListReducers, addressCreateReducer, addressRemoveReducer } from './reducers/addressReducers';
 
 const reducer = combineReducers({
@@ -28,7 +27,7 @@ const reducer = combineReducers({
   categoryList: categoryListReducer,
 
   productList: productListReducer,
- productDetails: productDetailsReducer,
+  productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -38,11 +37,14 @@ const reducer = combineReducers({
   cartLists: cartListReducer,
   cartCreate: cartCreateReducer,
   cartDelete: cartDeleteReducer,
+
   orderLists: orderListReducer,
-  orderDetails:orderDetailsReducer,
+  orderCreate :orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+
   addressLists: addressListReducers,
   addressCreate: addressCreateReducer,
-  addressDelete:addressRemoveReducer,
+  addressDelete: addressRemoveReducer,
 });
  
 

@@ -13,11 +13,11 @@ export default function Account({ history }) {
 
   const orderList = useSelector((state) => state.orderLists);
 
-  const addressList = useSelector((state) => state.addressLists);
+  const addressLists = useSelector((state) => state.addressLists);
 
   const { loading, error, orderLists } = orderList;
 
-  const { addressLists } = addressList;
+  const { address } = addressLists;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -164,7 +164,7 @@ export default function Account({ history }) {
                       by default.
                     </p>
                     <h4 class="billing-address">Billing address</h4>
-                    {addressLists.billingAddress?.map((billAddress) => (
+                    {address.billingAddress?.map((billAddress) => (
                       <div>
                         <a href="#" class="view">
                           Edit
@@ -206,7 +206,7 @@ export default function Account({ history }) {
                     ))}
 
                     <h4 class="billing-address">Shipping address</h4>
-                    {addressLists.shippingAddress?.map((shippAddress) => (
+                    {address.shippingAddress?.map((shippAddress) => (
                       <div>
                         <a href="#" class="view">
                           Edit
@@ -222,7 +222,8 @@ export default function Account({ history }) {
                           </span>
                           , <br />
                           <span>
-                            <strong>Appartment:</strong> {shippAddress.apartment}
+                            <strong>Appartment:</strong>{' '}
+                            {shippAddress.apartment}
                           </span>
                           , <br />
                           <span>

@@ -1,97 +1,39 @@
-import React, { useEffect, useRef } from 'react';
-import $ from 'jquery';
+import React  from 'react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-export default function Slider() {
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-  useEffect(() => {
-    console.log($('.slider_area'));
-      setTimeout(function () {
-          $('.slider_area').owlCarousel({
-            animateOut: 'fadeOut',
-            loop: true,
-            nav: true,
-            autoplay: false,
-            autoplayTimeout: 8000,
-            items: 1,
-            dots: true,
-            navText: [
-              '<i class="fa fa-angle-left"></i>',
-              '<i class="fa fa-angle-right"></i>',
-            ],
-          });
-      }, 2000);
- 
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
- 
-  }, [])
-  
-   const carousel = useRef(null);
+const Slider =() => {
+
+   
 
 
   return (
-    <section class="slider_section">
-      <div class="slider_area owl-carousel" ref={carousel}>
-        <div
-          class="single_slider d-flex align-items-center"
-          data-bgimg="assets/img/slider/slider1.jpg"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="slider_content">
-                  <h1>BIG SALE</h1>
-                  <p>
-                    Discount <span>20% Off </span> For Lukani Members{' '}
-                  </p>
-                  <a class="button" href="shop.html">
-                    Discover Now{' '}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="single_slider d-flex align-items-center"
-          data-bgimg="assets/img/slider/slider2.jpg"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="slider_content">
-                  <h1>TOP SALE</h1>
-                  <p>
-                    Discount <span>20% Off </span> For Lukani Members{' '}
-                  </p>
-                  <a class="button" href="shop.html">
-                    Discover Now{' '}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="single_slider d-flex align-items-center"
-          data-bgimg="assets/img/slider/slider3.jpg"
-        >
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="slider_content">
-                  <h1>Lovely Plants </h1>
-                  <p>
-                    Discount <span>20% Off </span> For Lukani Members{' '}
-                  </p>
-                  <a class="button" href="shop.html">
-                    Discover Now{' '}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={50}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      <SwiperSlide>
+        <img src={`http://3.28.120.238/uploads/image_1666238202505.jpeg`} />
+      </SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      
+      
+    </Swiper>
   );
 }
+
+
+export default Slider;

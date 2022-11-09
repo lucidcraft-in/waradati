@@ -11,12 +11,12 @@ import {
     ADDRESS_REMOVE_FAIL,
 } from '../constants/addressConstants';
 
-export const addressListReducers = (state = { addressLists: [] }, action) => {
+export const addressListReducers = (state = { address: [] }, action) => {
     switch (action.type) {
         case ADDRESS_LIST_REQUEST:
-            return { loading: true, addressLists: [] };
+            return { loading: true, address: [] };
         case ADDRESS_LIST_SUCCESS:
-            return { loading: false, addressLists: action.payload, };
+            return { loading: false, address: action.payload };
         case ADDRESS_LIST_FAIL:
             return { loading: false, error: action.payload, };
         default:
