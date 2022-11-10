@@ -3,7 +3,10 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
  
 
-import { homePageCategoryListReducer } from './reducers/homePageReducer';
+import {
+  homePageCategoryListReducer,
+  homePageBannerListReducer,
+} from './reducers/homePageReducer';
 import {
   categoryListReducer,
  
@@ -24,6 +27,8 @@ import { addressListReducers, addressCreateReducer, addressRemoveReducer } from 
 
 const reducer = combineReducers({
   homePageCategory: homePageCategoryListReducer,
+  bannerList :homePageBannerListReducer,
+
   categoryList: categoryListReducer,
 
   productList: productListReducer,
