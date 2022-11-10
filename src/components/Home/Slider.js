@@ -1,7 +1,11 @@
-import React  from 'react';
+import React, { useEffect } from 'react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { homePageBanner } from '../../actions/homePageActions';
+
+
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,8 +14,17 @@ import 'swiper/css/scrollbar';
 
 const Slider =() => {
 
-   
+  const dispatch = useDispatch();
+  
 
+     const bannerList = useSelector((state) => state.bannerList);
+     const { loading, error, banners } = bannerList;
+
+  useEffect(() => {
+    dispatch(homePageBanner());
+  }, []);
+  
+  
 
   return (
     <Swiper
@@ -25,12 +38,13 @@ const Slider =() => {
       onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
-      <SwiperSlide>
-        <img src={`http://3.28.120.238/uploads/image_1666238202505.jpeg`} />
-      </SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      
-      
+      {banners?.map((banner) => (
+        <SwiperSlide>
+          <img src={`${process.env.REACT_APP_API_URL}/${banner.image}`} />
+        </SwiperSlide>
+      ))}
+
+     
     </Swiper>
   );
 }
