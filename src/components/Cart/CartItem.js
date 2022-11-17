@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCart  } from '../../actions/cartActions';
 export default function CartItem({ cartLists, cart, deleteHandler, }) {
-    const dispatch = useDispatch();
-    const [quantity, setQuantity] = useState(cart.quantity);
+  const dispatch = useDispatch();
+  
+  const [quantity, setQuantity] = useState(cart.quantity);
+  const [price, setPrice] = useState(cart.sellingPrice);
+  
     const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo } = userLogin;
+  const { userInfo } = userLogin;
+  
+
     const addToCart = (e, product) => {
 
         setQuantity(e.target.value);
@@ -26,35 +31,35 @@ export default function CartItem({ cartLists, cart, deleteHandler, }) {
       
   return (
     <tr>
-      <td class="product_remove">
+      <td className="product_remove">
         <a href="#">
           <i
-            class="fa fa-trash-o"
+            className="fa fa-trash-o"
             onClick={() => deleteHandler(cartLists._id, cart.itemId)}
           ></i>
         </a>
       </td>
-      <td class="product_thumb">
+      <td className="product_thumb">
         <a href="#">
           <img src={`${process.env.REACT_APP_API_URL}/${cart.image}`} alt="" />
         </a>
       </td>
-      <td class="product_name">
+      <td className="product_name">
         <a href="#">{cart.itemName}</a>
       </td>
-      <td class="product-price">AED {cart.sellingPrice}</td>
-      <td class="product_quantity">
+      <td className="product-price">AED {cart.sellingPrice}</td>
+      <td className="product_quantity">
         <label>Quantity</label>{' '}
         <input
           min="1"
           max="100"
           value={quantity}
-                  type="number"
-                  name='quantity'
-          onChange={(e) =>addToCart(e,cart) }
+          type="number"
+          name="quantity"
+          onChange={(e) => addToCart(e, cart)}
         />
       </td>
-      <td class="product_total">AED {cart.sellingPrice * cart.quantity}</td>
+      <td className="product_total">AED {price * quantity}</td>
     </tr>
   );
 }

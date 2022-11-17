@@ -4,6 +4,7 @@ import { wishlIstListByUser, removeWishList } from '../../actions/wishlistAction
 import { useNavigate  } from "react-router-dom";
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
+import { Link } from 'react-router-dom';
 
 export default function WishList({ history }) {
   const navigate = useNavigate();
@@ -38,8 +39,7 @@ export default function WishList({ history }) {
     }
  
       dispatch(wishlIstListByUser(userInfo._id))
-      console.log(wishlists);
-    console.log(wishlists.length);
+  
      arrayLength = wishlists.length;
   }, [
     dispatch,
@@ -62,14 +62,14 @@ export default function WishList({ history }) {
     <div>
       {' '}
       <NavBar />
-      <div class="breadcrumbs_area">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="breadcrumb_content">
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
                 <ul>
                   <li>
-                    <a href="index.html">home</a>
+                    <Link to="/">home</Link>
                   </li>
                   <li>Wish List</li>
                 </ul>
@@ -77,73 +77,107 @@ export default function WishList({ history }) {
             </div>
           </div>
         </div>
-          </div>
-           <div class="wishlist_area mt-100">
-        <div class="container">
-            <form action="#">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="table_desc wishlist">
-                            <div class="cart_page table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product_remove">Delete</th>
-                                            <th class="product_thumb">Image</th>
-                                            <th class="product_name">Product</th>
-                                            <th class="product-price">Price</th>
-                                            <th class="product_quantity">Stock Status</th>
-                                            <th class="product_total">Add To Cart</th>
-                                        </tr>
-                                    </thead>
+      </div>
+      <div className="wishlist_area mt-100">
+        <div className="container">
+          <form action="#">
+            <div className="row">
+              <div className="col-12">
+                <div className="table_desc wishlist">
+                  <div className="cart_page table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th className="product_remove">Delete</th>
+                          <th className="product_thumb">Image</th>
+                          <th className="product_name">Product</th>
+                          <th className="product-price">Price</th>
+                          <th className="product_quantity">Stock Status</th>
+                          <th className="product_total">Add To Cart</th>
+                        </tr>
+                      </thead>
                       <tbody>
-                        {wishlists.length > 0 ? wishlists.map((wishlist) => (
-                           <tr>
-                           <td class="product_remove"><a  onClick={() => deleteHandler(wishlist._id)}>X</a></td>
-                           <td class="product_thumb"><a href="#"><img  src={`${process.env.REACT_APP_API_URL}/${wishlist.items[0].images[0].url}`}
-                                      alt=""/></a></td>
-                            <td class="product_name"><a href="#">{ wishlist.items[0].name}</a></td>
-                            <td class="product-price">{ wishlist.items[0].sellingPrice}</td>
-                           <td class="product_quantity">{!wishlist.items[0].stock  ? "In Stock": "Out of Stock"}</td>
-                           <td class="product_total"><a href="#">Add To Cart</a></td>
-
-
-                       </tr>
-                          
-                        )) : (<div>
+                        {wishlists?.length > 0 ? (
+                          wishlists?.map((wishlist) => (
+                            <tr>
+                              <td className="product_remove">
+                                <a onClick={() => deleteHandler(wishlist._id)}>
+                                  X
+                                </a>
+                              </td>
+                              <td className="product_thumb">
+                                <a href="#">
+                                  <img
+                                    src={`${process.env.REACT_APP_API_URL}/${wishlist?.items[0]?.images[0]?.url}`}
+                                    alt=""
+                                  />
+                                </a>
+                              </td>
+                              <td className="product_name">
+                                <a href="#">{wishlist?.items[0]?.name}</a>
+                              </td>
+                              <td className="product-price">
+                                {wishlist?.items[0]?.sellingPrice}
+                              </td>
+                              <td className="product_quantity">
+                                {!wishlist?.items[0]?.stock
+                                  ? 'In Stock'
+                                  : 'Out of Stock'}
+                              </td>
+                              <td className="product_total">
+                                <a href="#">Add To Cart</a>
+                              </td>
+                            </tr>
+                          ))
+                        ) : (
+                          <div>
                             <p>No data available</p>
-                        </div>)}
-                                       
-
-                                       
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
+                          </div>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-
-            </form>
-            <div class="row">
-                <div class="col-12">
-                    <div class="wishlist_share">
-                        <h4>Share on:</h4>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-                            <li><a href="#"><i class="fa fa-tumblr"></i></a></li>
-                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
+              </div>
             </div>
-
-        </div>
+          </form>
+          <div className="row">
+            <div className="col-12">
+              <div className="wishlist_share">
+                <h4>Share on:</h4>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-rss"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-vimeo"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-tumblr"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-pinterest"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i className="fa fa-linkedin"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <Footer/>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

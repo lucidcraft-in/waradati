@@ -37,7 +37,7 @@
         autoplayTimeout: 8000,
         items: 1,
         dots:true,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
     });
     
     /*---product column4 activation---*/
@@ -50,7 +50,7 @@
         items: 4,
         dots:false,
         margin: 30,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -79,7 +79,7 @@
         items: 5,
         dots:false,
         margin: 30,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -114,7 +114,7 @@
         items: 5,
         dots:false,
         margin: 30,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -150,7 +150,7 @@
         items: 3,
         dots:false,
            margin: 30,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -180,7 +180,7 @@
         items: 3,
         dots:false,
         margin: 30,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -206,7 +206,7 @@
         autoplayTimeout: 8000,
         items: 6,
         dots:false,
-       navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+       navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -236,7 +236,7 @@
         autoplayTimeout: 8000,
         items: 1,
         dots:false,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
     });
     
     /*---testimonial active activation---*/
@@ -258,7 +258,7 @@
         autoplay: false,
         autoplayTimeout: 8000,
         items: 1,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
     });
     
     
@@ -272,7 +272,7 @@
         items: 4,
         margin:15,
         dots:false,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -301,7 +301,7 @@
         autoplayTimeout: 8000,
         items: 4,
         dots:false,
-        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        navText: ['<i className="fa fa-angle-left"></i>','<i className="fa fa-angle-right"></i>'],
         responsiveClass:true,
 		responsive:{
 				0:{
@@ -361,7 +361,7 @@
 
     /*---  ScrollUp Active ---*/
     $.scrollUp({
-        scrollText: '<i class="fa fa-angle-double-up"></i>',
+        scrollText: '<i className="fa fa-angle-double-up"></i>',
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade'
@@ -372,7 +372,7 @@
 	 $('[data-countdown]').each(function() {
 		var $this = $(this), finalDate = $(this).data('countdown');
 		$this.countdown(finalDate, function(event) {
-		$this.html(event.strftime('<div class="countdown_area"><div class="single_countdown"><div class="countdown_number">%D</div><div class="countdown_title">days</div></div><div class="single_countdown"><div class="countdown_number">%H</div><div class="countdown_title">hours</div></div><div class="single_countdown"><div class="countdown_number">%M</div><div class="countdown_title">mins</div></div><div class="single_countdown"><div class="countdown_number">%S</div><div class="countdown_title">secs</div></div></div>'));     
+		$this.html(event.strftime('<div className="countdown_area"><div className="single_countdown"><div className="countdown_number">%D</div><div className="countdown_title">days</div></div><div className="single_countdown"><div className="countdown_number">%H</div><div className="countdown_title">hours</div></div><div className="single_countdown"><div className="countdown_number">%M</div><div className="countdown_title">mins</div></div><div className="single_countdown"><div className="countdown_number">%S</div><div className="countdown_title">secs</div></div></div>'));     
                
        });
 	});	
@@ -453,8 +453,8 @@
 
 		e.preventDefault();
 		$(".categories_menu_toggle li.hidden").toggle(500);
-		var htmlAfter = '<i class="fa fa-minus" aria-hidden="true"></i> Less Categories';
-		var htmlBefore = '<i class="fa fa-plus" aria-hidden="true"></i> More Categories';
+		var htmlAfter = '<i className="fa fa-minus" aria-hidden="true"></i> Less Categories';
+		var htmlBefore = '<i className="fa fa-plus" aria-hidden="true"></i> More Categories';
 
 
 		if ($(this).html() == htmlBefore) {
@@ -507,7 +507,7 @@
             }
         }
         });
-        $('.categories_menu_toggle li.menu_item_children > a').append('<span class="expand"></span>');
+        $('.categories_menu_toggle li.menu_item_children > a').append('<span className="expand"></span>');
     }
     categorySubMenuToggle();
 
@@ -613,7 +613,7 @@
     /*---Off Canvas Menu---*/
     var $offcanvasNav = $('.offcanvas_main_menu'),
         $offcanvasNavSubMenu = $offcanvasNav.find('.sub-menu');
-    $offcanvasNavSubMenu.parent().prepend('<span class="menu-expand"><i class="fa fa-angle-down"></i></span>');
+    $offcanvasNavSubMenu.parent().prepend('<span className="menu-expand"><i className="fa fa-angle-down"></i></span>');
     
     $offcanvasNavSubMenu.slideUp();
     

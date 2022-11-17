@@ -60,7 +60,8 @@ export const addCart = (cart) => async (dispatch, getState) => {
         };
         
         const { data } = await Axios.post(`/api/cart`, cart, config);
-        dispatch({ type: CART_ADD_SUCCESS, payload: data });
+      dispatch({ type: CART_ADD_SUCCESS, payload: data });
+      return data;
     }
     catch (error) {
         const message =
@@ -113,3 +114,28 @@ export const removeCart = (cart) => async (dispatch, getState) => {
       });
     }
 }
+
+
+export const checkCartItemAdded =
+  ( itemId, stockId) => async (dispatch, getState) => {
+    try {
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await Axios.get(
+        `/api/cart/${userInfo._id}/${itemId}/${stockId}`,
+        config
+      );
+
+      return data;
+    } catch (error) {
+      return error;
+    }
+  };

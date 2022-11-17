@@ -1,5 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { message } from 'antd';
 
  import { addressListByUser, addAddress } from '../../actions/addressAction';
 import { cartListByUser } from '../../actions/cartActions';
@@ -8,6 +10,7 @@ import { createOrder } from '../../actions/orderActions';
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 import Breadcrumb from '../Common/Breadcrumb';
+import SuccessModal from './SuccessModal';
 
 const Checkout = () => {
 
@@ -18,10 +21,16 @@ const Checkout = () => {
 
     
   const addressLists = useSelector((state) => state.addressLists);
-    const { address } = addressLists;
+  const { address } = addressLists;
+  
+  const addressCreate = useSelector((state) => state.addressCreate);
+  const { success, address_ } = addressCreate;
 
       const cartList = useSelector((state) => state.cartLists);
-      const {    cartLists } = cartList;
+  const { cartLists } = cartList;
+  
+   const orderCreate = useSelector((state) => state.orderCreate);
+   const { success: orderCreateSuccess, order } = orderCreate;
     
      const [cartAmount, setCartSubTotal] = useState(0);
     const [firstName, setFirstName] = useState('')
@@ -33,20 +42,32 @@ const Checkout = () => {
     const [phone, setPhone] = useState();
     const [zip, setZip] = useState();
     
-    const [selectedAddress, setSelectedAddress] = useState({});
+  const [selectedAddress, setSelectedAddress] = useState({});
+   const [selectedAddressId, setSelectedAddressId] = useState();
   const [setCalculateTotal, setCalculateTotalFn] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   
     useEffect(() => {
-       
-        dispatch(addressListByUser(userInfo._id));
-        dispatch(cartListByUser(userInfo._id));
+      dispatch(addressListByUser(userInfo._id));
+      dispatch(cartListByUser(userInfo._id));
 
-        cartTotalFunc();
-      
-    }, [userInfo]);
+      if (success === true) {
+        setSelectedAddressId(address_._id);
+        setSelectedAddress(address_.shippingAddress);
+      }
+
+      if (orderCreateSuccess === true) {
+        setShow(true);
+      }
+      cartTotalFunc();
+    }, [userInfo, success, orderCreateSuccess]);
 
 
-    console.log(cartLists.userId);
+  
 
     const addAddress_ = (e) => {
         e.preventDefault();
@@ -67,7 +88,21 @@ const Checkout = () => {
           billingAddress: shippingAddress,
           user: userInfo._id,
         };
-             dispatch(addAddress(data));
+      dispatch(addAddress(data));
+      
+       message.success('Successfully added', 3);
+
+      // set data is empty
+      setFirstName('')
+      setLastName('')
+      setAddress1('')
+      setAddress2('')
+      setApartment('')
+      setCity('')
+      setPhone('')
+      setZip('')
+
+     
     }
 
  
@@ -89,9 +124,14 @@ const Checkout = () => {
     const placeOrder = (e) => {
 
       e.preventDefault();
+
+      if (selectedAddress.firstName === undefined) {
+        message.error('Please select Delivery address', 3);
+        return;
+      }
       
       
-        
+       
        
 
         let data = {
@@ -103,7 +143,7 @@ const Checkout = () => {
           isPaid: false,
           isShipped: true,
           isDelivered: false,
-          addressId: selectedAddress._id,
+          addressId: selectedAddressId,
         };
 
           dispatch(createOrder(data));
@@ -113,48 +153,81 @@ const Checkout = () => {
     setCalculateTotalFn(true);
      cartTotalFunc();
   }  
-  console.log(selectedAddress);
+
+  const changeAddress = (address) => {
+    setSelectedAddress(address.shippingAddress);
+    setSelectedAddressId(address._id);
+  }
+
+ 
+  
+ 
   return (
     <div>
       {' '}
       <NavBar />
-      <Breadcrumb />
-      <div class="Checkout_section  mt-100" id="accordion">
-        <div class="container">
-          <div class="checkout_form">
-            <div class="row">
-              <div class="col-lg-6 col-md-6">
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
+                <ul>
+                  <li>
+                    <Link to="/">home</Link>
+                  </li>
+                  <li>Checkout </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <SuccessModal order={order} show={show} />
+      <div className="Checkout_section  mt-100" id="accordion">
+        <div className="container">
+          <div className="checkout_form">
+            <div className="row">
+              <div className="col-lg-6 col-md-6">
                 <form>
                   <h3>DELIVERY ADDRESS</h3>
-                  <div class="payment_method">
-                    {address?.shippingAddress?.map((address) => (
-                      <div class="panel-default">
+                  <div className="payment_method">
+                    {address?.map((address, index) => (
+                      <div className="panel-default">
                         <div className="row">
                           <div className="col-1">
                             {' '}
                             <input
                               type="radio"
-                              onChange={(e) => setSelectedAddress(address)}
+                              id={address._id}
+                              checked={
+                                address._id === selectedAddressId ? true : false
+                              }
+                              onChange={(e) => changeAddress(address)}
                             />{' '}
                           </div>
                           <div className="col-8">
                             <b>
                               {' '}
-                              {address.firstName} &nbsp; {address.lastName}{' '}
+                              {address.shippingAddress.firstName} &nbsp;{' '}
+                              {address.shippingAddress.lastName}{' '}
                             </b>
                             <br />
-                            {address.address1} &nbsp; {address.address2} <br />
-                            {address.apartment} &nbsp; {address.city} <br />
-                            {address.phone}
+                            {address.shippingAddress.address1} &nbsp;{' '}
+                            {address.shippingAddress.address2} <br />
+                            {address.shippingAddress.apartment} &nbsp;{' '}
+                            {address.shippingAddress.city} <br />
+                            <span className="checkout-address-phone">
+                              {address.shippingAddress.phone}
+                            </span>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div class="row mt-3">
-                    <div class="col-12 mb-20">
+                  <div className="row mt-3">
+                    <div className="col-12 mb-20">
                       <label
-                        class="righ_0"
+                        className="righ_0"
                         for="address"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapsetwo"
@@ -165,11 +238,11 @@ const Checkout = () => {
 
                       <div
                         id="collapsetwo"
-                        class="collapse one"
+                        className="collapse one"
                         data-parent="#accordion"
                       >
-                        <div class="row mt-3">
-                          <div class="col-lg-6 mb-20">
+                        <div className="row mt-3">
+                          <div className="col-lg-6 mb-20">
                             <label>
                               First Name <span>*</span>
                             </label>
@@ -178,9 +251,10 @@ const Checkout = () => {
                               name="firstName"
                               value={firstName}
                               onChange={(e) => setFirstName(e.target.value)}
+                              required={true}
                             />
                           </div>
-                          <div class="col-lg-6 mb-20">
+                          <div className="col-lg-6 mb-20">
                             <label>
                               Last Name <span>*</span>
                             </label>
@@ -192,7 +266,7 @@ const Checkout = () => {
                             />
                           </div>
 
-                          <div class="col-12 mb-20">
+                          <div className="col-12 mb-20">
                             <label>
                               Street address <span>*</span>
                             </label>
@@ -202,9 +276,10 @@ const Checkout = () => {
                               name="address1"
                               value={address1}
                               onChange={(e) => setAddress1(e.target.value)}
+                              required={true}
                             />
                           </div>
-                          <div class="col-12 mb-20">
+                          <div className="col-12 mb-20">
                             <input
                               placeholder="Floor No & Building No"
                               type="text"
@@ -213,7 +288,7 @@ const Checkout = () => {
                               onChange={(e) => setAddress2(e.target.value)}
                             />
                           </div>
-                          <div class="col-12 mb-20">
+                          <div className="col-12 mb-20">
                             <label>
                               Makani No <span>*</span>
                             </label>
@@ -222,9 +297,10 @@ const Checkout = () => {
                               name="apartment"
                               value={apartment}
                               onChange={(e) => setApartment(e.target.value)}
+                              required={true}
                             />
                           </div>
-                          <div class="col-12 mb-20">
+                          <div className="col-12 mb-20">
                             <label>
                               Emirate <span>*</span>
                             </label>
@@ -233,9 +309,10 @@ const Checkout = () => {
                               name="city"
                               value={city}
                               onChange={(e) => setCity(e.target.value)}
+                              required={true}
                             />
                           </div>
-                          <div class="col-lg-6 mb-20">
+                          <div className="col-lg-6 mb-20">
                             <label>
                               Phone<span>*</span>
                             </label>
@@ -244,9 +321,10 @@ const Checkout = () => {
                               name="phone"
                               value={phone}
                               onChange={(e) => setPhone(e.target.value)}
+                              required={true}
                             />
                           </div>
-                          <div class="col-lg-6 mb-20">
+                          <div className="col-lg-6 mb-20">
                             <label>
                               ZIP<span>*</span>
                             </label>
@@ -255,18 +333,19 @@ const Checkout = () => {
                               name="zip"
                               value={zip}
                               onChange={(e) => setZip(e.target.value)}
+                              required={true}
                             />
                           </div>
                         </div>
-                        <div class="order_button">
+                        <div className="order_button">
                           <button onClick={(e) => addAddress_(e)}>
                             SAVE AND DELIVER HERE
                           </button>
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="order-notes">
+                    <div className="col-12">
+                      <div className="order-notes">
                         <label for="order_note">Order Notes</label>
                         <textarea
                           id="order_note"
@@ -277,10 +356,10 @@ const Checkout = () => {
                   </div>
                 </form>
               </div>
-              <div class="col-lg-6 col-md-6">
-                <form  >
+              <div className="col-lg-6 col-md-6">
+                <form>
                   <h3>Your order</h3>
-                  <div class="order_table table-responsive">
+                  <div className="order_table table-responsive">
                     <table>
                       <thead>
                         <tr>
@@ -305,7 +384,7 @@ const Checkout = () => {
                             <strong>-</strong>
                           </td>
                         </tr>
-                        <tr class="order_total">
+                        <tr className="order_total">
                           <th>Order Total</th>
                           <td>
                             <strong> AED&nbsp;{cartAmount}</strong>
@@ -314,8 +393,8 @@ const Checkout = () => {
                       </tfoot>
                     </table>
                   </div>
-                  <div class="payment_method">
-                    <div class="panel-default">
+                  <div className="payment_method">
+                    <div className="panel-default">
                       <input
                         id="payment"
                         name="check_method"
@@ -331,7 +410,7 @@ const Checkout = () => {
                         C O D [ COD only available now]
                       </label>
                     </div>
-                    <div class="panel-default">
+                    <div className="panel-default">
                       <input
                         id="payment_defult"
                         name="check_method"
@@ -349,10 +428,10 @@ const Checkout = () => {
 
                       <div
                         id="collapsedefult"
-                        class="collapse one"
+                        className="collapse one"
                         data-parent="#accordion"
                       >
-                        <div class="card-body1">
+                        <div className="card-body1">
                           <p>
                             Pay via PayPal; you can pay with your credit card if
                             you don’t have a PayPal account.
@@ -360,8 +439,10 @@ const Checkout = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="order_button mb-3">
-                      <button onClick={(e) => placeOrder(e)}>Place Order</button>
+                    <div className="order_button m-3">
+                      <button onClick={(e) => placeOrder(e)}>
+                        Place Order
+                      </button>
                     </div>
                   </div>
                 </form>

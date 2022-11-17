@@ -23,12 +23,12 @@ const Login = ({ location }) => {
   return (
     <div>
       {' '}
-      <div class="customer_login">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-3"></div>
-            <div class="col-lg-6 col-md-6">
-              <div class="account_form">
+      <div className="customer_login">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-3"></div>
+            <div className="col-lg-6 col-md-6">
+              <div className="account_form">
                 <h2>login</h2>
                 <form onSubmit={submitHandler}>
                   <p>
@@ -43,7 +43,7 @@ const Login = ({ location }) => {
                     </label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                   </p>
-                  <div class="login_submit">
+                  <div className="login_submit">
                  
                    
                         <Link to="/signup">
@@ -59,7 +59,7 @@ const Login = ({ location }) => {
                 </form>
               </div>
             </div>
-            <div class="col-lg-3 col-md-3"></div>
+            <div className="col-lg-3 col-md-3"></div>
           </div>
         </div>
       </div>

@@ -24,12 +24,12 @@ const SignUp = ({ }) => {
   return (
     <div>
       {' '}
-      <div class="customer_login">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-3 col-md-3"></div>
-            <div class="col-lg-6 col-md-6">
-              <div class="account_form">
+      <div className="customer_login">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-md-3"></div>
+            <div className="col-lg-6 col-md-6">
+              <div className="account_form">
                 <h2>Sign up</h2>
                 <form onSubmit={submitHandler}>
                   <p>
@@ -50,7 +50,7 @@ const SignUp = ({ }) => {
                     </label>
                     <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   </p>
-                  <div class="login_submit">
+                  <div className="login_submit">
                     <a href="#">Lost your password?</a>
                     <label for="remember">
                       <input id="remember" type="checkbox" />
@@ -61,7 +61,7 @@ const SignUp = ({ }) => {
                 </form>
               </div>
             </div>
-            <div class="col-lg-3 col-md-3"></div>
+            <div className="col-lg-3 col-md-3"></div>
           </div>
         </div>
       </div>
