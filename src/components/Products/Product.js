@@ -52,7 +52,7 @@ const Product = ({ product }) => {
           <div className="product_thumb">
             {/* <a className="primary_img" href="product-details.html"> */}
             <img
-              src={`${process.env.REACT_APP_API_URL}/${product.product_items[0].images[0].url}`}
+              src={`${product.product_items[0].images[0].url}`}
               alt=""
             />
             {/* </a> */}

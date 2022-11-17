@@ -41,7 +41,7 @@ export default function CartItem({ cartLists, cart, deleteHandler, }) {
       </td>
       <td className="product_thumb">
         <a href="#">
-          <img src={`${process.env.REACT_APP_API_URL}/${cart.image}`} alt="" />
+          <img src={`${cart.image}`} alt="" />
         </a>
       </td>
       <td className="product_name">

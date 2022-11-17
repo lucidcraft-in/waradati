@@ -34,7 +34,7 @@ const ProductInfo = ({ data }) => {
   const checkYouReviewedThisProduct = () => {
   
     
-    const test = data?.reviews?.some((review) => review.user === userInfo._id);
+    const test = data?.reviews?.some((review) => review.user === userInfo?._id);
       
     if (data?.reviews?.length === 0 || test===false) {
       setIsReviewed(false)

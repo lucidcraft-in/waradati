@@ -60,7 +60,7 @@ const NavBar = () => {
     dispatch(listCategoriesByPriority(''));
     dispatch(listCategories());
 
-    dispatch(cartListByUser(userInfo._id));
+    dispatch(cartListByUser(userInfo?._id));
 
    
 

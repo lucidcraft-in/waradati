@@ -40,7 +40,7 @@ const Slider =() => {
     >
       {banners?.map((banner) => (
         <SwiperSlide>
-          <img src={`${process.env.REACT_APP_API_URL}/${banner.image}`} />
+          <img src={`${banner.image}`} />
         </SwiperSlide>
       ))}
 
