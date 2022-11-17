@@ -16,7 +16,7 @@ const SingleProduct =({ product, page }) => {
         <div className="product_thumb">
           <a className="primary_img">
             <img
-              src={`${process.env.REACT_APP_API_URL}/${
+              src={`${
                 product.product && product.product[0].images[0].url
               } `}
               alt=""

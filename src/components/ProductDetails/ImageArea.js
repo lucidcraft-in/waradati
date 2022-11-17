@@ -30,7 +30,7 @@ export default function ImageArea({ product }) {
         >
           {product?.images?.map((image) => (
             <SwiperSlide>
-              <img src={`${process.env.REACT_APP_API_URL}/${image.url}`} />
+              <img src={`${image.url}`} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -46,7 +46,7 @@ export default function ImageArea({ product }) {
         >
           {product?.images?.map((image) => (
             <SwiperSlide>
-              <img src={`${process.env.REACT_APP_API_URL}/${image.url}`} />
+              <img src={`${image.url}`} />
             </SwiperSlide>
           ))}
         </Swiper>
