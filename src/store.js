@@ -6,13 +6,21 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   homePageCategoryListReducer,
   homePageBannerListReducer,
+  homePageTopSellingProducts,
+  homePageTrendingProducts,
+  homePageCategoryByPriority,
 } from './reducers/homePageReducer';
 import {
   categoryListReducer,
  
 } from './reducers/categoryReducers';
 
-import { productListReducer ,productDetailsReducer} from './reducers/productReducer';
+import {
+  productListReducer,
+  productDetailsReducer,
+  productByCategoryPriorityHomeListReducer,
+  nearestProductsReducer,
+} from './reducers/productReducer';
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -27,18 +35,26 @@ import { addressListReducers, addressCreateReducer, addressRemoveReducer } from 
 
 const reducer = combineReducers({
   homePageCategory: homePageCategoryListReducer,
-  bannerList :homePageBannerListReducer,
+  bannerList: homePageBannerListReducer,
+  topSellingProduct: homePageTopSellingProducts,
+  trendingProductsList: homePageTrendingProducts,
+  categoryByPriorities :homePageCategoryByPriority,
 
   categoryList: categoryListReducer,
 
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productHome: productByCategoryPriorityHomeListReducer,
+  nearestProduct :nearestProductsReducer,
+
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+
   wishlists: wishListReducer,
   wishLishCreate: wishlistCreateReducer,
   wishListDelete: wishListDeleteReducer,
+  
   cartLists: cartListReducer,
   cartCreate: cartCreateReducer,
   cartDelete: cartDeleteReducer,

@@ -8,24 +8,27 @@ import Testimonials from './Testimonials';
 import TrendingProducts from './TrendingProducts';
 
 import Footer from '../Layout/Footer';
-import shipping1 from './shipping1.jpg';
-import shipping2 from './shipping2.jpg';
-import shipping3 from './shipping3.jpg';
+import shipping1 from './img/shipping1.jpg';
+import shipping2 from './img/shipping2.jpg';
+import shipping3 from './img/shipping3.jpg';
+
+import banner1 from './img/banner1.jpg';
+import banner2 from './img/banner2.jpg';
 
 const Home =()=> {
   return (
     <div>
       <NavBar />
       <Slider />
-      <div class="shipping_area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="single_shipping">
-                <div class="shipping_icone">
+      <div className="shipping_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-6">
+              <div className="single_shipping">
+                <div className="shipping_icone">
                   <img src={shipping1} alt="" />
                 </div>
-                <div class="shipping_content">
+                <div className="shipping_content">
                   <h3>Free Delivery</h3>
                   <p>
                     Free shipping around the world for all <br /> orders over
@@ -34,12 +37,12 @@ const Home =()=> {
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="single_shipping col_2">
-                <div class="shipping_icone">
+            <div className="col-lg-4 col-md-6">
+              <div className="single_shipping col_2">
+                <div className="shipping_icone">
                   <img src={shipping2} alt="" />
                 </div>
-                <div class="shipping_content">
+                <div className="shipping_content">
                   <h3>Safe Payment</h3>
                   <p>
                     With our payment gateway, don’t worry <br /> about your
@@ -48,12 +51,12 @@ const Home =()=> {
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="single_shipping col_3">
-                <div class="shipping_icone">
+            <div className="col-lg-4 col-md-6">
+              <div className="single_shipping col_3">
+                <div className="shipping_icone">
                   <img src={shipping3} alt="" />
                 </div>
-                <div class="shipping_content">
+                <div className="shipping_content">
                   <h3>Friendly Services</h3>
                   <p>
                     You have 30-day return guarantee for <br /> every single
@@ -65,16 +68,16 @@ const Home =()=> {
           </div>
         </div>
       </div>
-      <div class="banner_area">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 col-md-6">
-              <figure class="single_banner">
-                <div class="banner_thumb">
+      <div className="banner_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-6 col-md-6">
+              <figure className="single_banner">
+                <div className="banner_thumb">
                   <a href="shop.html">
-                    <img src="assets/img/bg/banner1.jpg" alt="" />
+                    <img src={banner1} alt="" />
                   </a>
-                  <div class="banner_content">
+                  <div className="banner_content">
                     <h3>Big Sale Products</h3>
                     <h2>
                       Plants <br /> For Interior
@@ -84,13 +87,13 @@ const Home =()=> {
                 </div>
               </figure>
             </div>
-            <div class="col-lg-6 col-md-6">
-              <figure class="single_banner">
-                <div class="banner_thumb">
+            <div className="col-lg-6 col-md-6">
+              <figure className="single_banner">
+                <div className="banner_thumb">
                   <a href="shop.html">
-                    <img src="assets/img/bg/banner2.jpg" alt="" />
+                    <img src={banner2} alt="" />
                   </a>
-                  <div class="banner_content">
+                  <div className="banner_content">
                     <h3>Top Products</h3>
                     <h2>
                       Plants <br /> For Healthy
@@ -106,7 +109,7 @@ const Home =()=> {
 
       <OurProducts />
       <TopSellingProducts />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <TrendingProducts />
       <Footer />
     </div>

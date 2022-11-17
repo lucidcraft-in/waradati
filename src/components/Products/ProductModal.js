@@ -18,36 +18,36 @@ export default function ProductModal({ product }) {
    console.log(product);
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="modal_box"
       tabindex="-1"
       role="dialog"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
           <button
             type="button"
-            class="close"
+            className="close"
             data-bs-dismiss="modal"
             aria-label="Close"
           >
             <span aria-hidden="true">
-              <i class="icon-x"></i>
+              <i className="icon-x"></i>
             </span>
           </button>
-          <div class="modal_body">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-5 col-md-5 col-sm-12">
-                  <div class="modal_tab">
-                    <div class="tab-content product-details-large">
+          <div className="modal_body">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-5 col-md-5 col-sm-12">
+                  <div className="modal_tab">
+                    <div className="tab-content product-details-large">
                       <div
-                        class="tab-pane fade show active"
+                        className="tab-pane fade show active"
                         id="tab1"
                         role="tabpanel"
                       >
-                        <div class="modal_tab_img">
+                        <div className="modal_tab_img">
                           <a href="#">
                              <img  src=
                             {`${process.env.REACT_APP_API_URL}/${images.url}`}/> 
@@ -55,8 +55,8 @@ export default function ProductModal({ product }) {
                           </a>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="tab2" role="tabpanel">
-                        <div class="modal_tab_img">
+                      <div className="tab-pane fade" id="tab2" role="tabpanel">
+                        <div className="modal_tab_img">
                           <a href="#">
                             <img
                               src="assets/img/product/productbig2.jpg"
@@ -65,8 +65,8 @@ export default function ProductModal({ product }) {
                           </a>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="tab3" role="tabpanel">
-                        <div class="modal_tab_img">
+                      <div className="tab-pane fade" id="tab3" role="tabpanel">
+                        <div className="modal_tab_img">
                           <a href="#">
                             <img
                               src="assets/img/product/productbig3.jpg"
@@ -75,8 +75,8 @@ export default function ProductModal({ product }) {
                           </a>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="tab4" role="tabpanel">
-                        <div class="modal_tab_img">
+                      <div className="tab-pane fade" id="tab4" role="tabpanel">
+                        <div className="modal_tab_img">
                           <a href="#">
                             <img
                               src="assets/img/product/productbig4.jpg"
@@ -86,14 +86,14 @@ export default function ProductModal({ product }) {
                         </div>
                       </div>
                     </div>
-                    <div class="modal_tab_button">
+                    <div className="modal_tab_button">
                       <ul
-                        class="nav product_navactive owl-carousel"
+                        className="nav product_navactive owl-carousel"
                         role="tablist"
                       >
                         <li>
                           <a
-                            class="nav-link active"
+                            className="nav-link active"
                             data-bs-toggle="tab"
                             href="#tab1"
                             role="tab"
@@ -105,7 +105,7 @@ export default function ProductModal({ product }) {
                         </li>
                         <li>
                           <a
-                            class="nav-link"
+                            className="nav-link"
                             data-bs-toggle="tab"
                             href="#tab2"
                             role="tab"
@@ -117,7 +117,7 @@ export default function ProductModal({ product }) {
                         </li>
                         <li>
                           <a
-                            class="nav-link button_three"
+                            className="nav-link button_three"
                             data-bs-toggle="tab"
                             href="#tab3"
                             role="tab"
@@ -129,7 +129,7 @@ export default function ProductModal({ product }) {
                         </li>
                         <li>
                           <a
-                            class="nav-link"
+                            className="nav-link"
                             data-bs-toggle="tab"
                             href="#tab4"
                             role="tab"
@@ -143,16 +143,16 @@ export default function ProductModal({ product }) {
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-7 col-md-7 col-sm-12">
-                  <div class="modal_right">
-                    <div class="modal_title mb-10">
+                <div className="col-lg-7 col-md-7 col-sm-12">
+                  <div className="modal_right">
+                    <div className="modal_title mb-10">
                       {/* <h2>{productData?.product_items[0]?.name}</h2> */}
                     </div>
-                    <div class="modal_price mb-10">
-                      <span class="new_price">$64.99</span>
-                      <span class="old_price">$78.99</span>
+                    <div className="modal_price mb-10">
+                      <span className="new_price">$64.99</span>
+                      <span className="old_price">$78.99</span>
                     </div>
-                    <div class="modal_description mb-15">
+                    <div className="modal_description mb-15">
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Mollitia iste laborum ad impedit pariatur esse
@@ -161,10 +161,10 @@ export default function ProductModal({ product }) {
                         rerum vel recusandae{' '}
                       </p>
                     </div>
-                    <div class="variants_selects">
-                      <div class="variants_size">
+                    <div className="variants_selects">
+                      <div className="variants_size">
                         <h2>size</h2>
-                        <select class="select_option">
+                        <select className="select_option">
                           <option selected value="1">
                             s
                           </option>
@@ -174,9 +174,9 @@ export default function ProductModal({ product }) {
                           <option value="1">xxl</option>
                         </select>
                       </div>
-                      <div class="variants_color">
+                      <div className="variants_color">
                         <h2>color</h2>
-                        <select class="select_option">
+                        <select className="select_option">
                           <option selected value="1">
                             purple
                           </option>
@@ -186,7 +186,7 @@ export default function ProductModal({ product }) {
                           <option value="1">orange</option>
                         </select>
                       </div>
-                      <div class="modal_add_to_cart">
+                      <div className="modal_add_to_cart">
                         <form action="#">
                           <input
                             min="1"
@@ -199,32 +199,32 @@ export default function ProductModal({ product }) {
                         </form>
                       </div>
                     </div>
-                    <div class="modal_social">
+                    <div className="modal_social">
                       <h2>Share this product</h2>
                       <ul>
-                        <li class="facebook">
+                        <li className="facebook">
                           <a href="#">
-                            <i class="fa fa-facebook"></i>
+                            <i className="fa fa-facebook"></i>
                           </a>
                         </li>
-                        <li class="twitter">
+                        <li className="twitter">
                           <a href="#">
-                            <i class="fa fa-twitter"></i>
+                            <i className="fa fa-twitter"></i>
                           </a>
                         </li>
-                        <li class="pinterest">
+                        <li className="pinterest">
                           <a href="#">
-                            <i class="fa fa-pinterest"></i>
+                            <i className="fa fa-pinterest"></i>
                           </a>
                         </li>
-                        <li class="google-plus">
+                        <li className="google-plus">
                           <a href="#">
-                            <i class="fa fa-google-plus"></i>
+                            <i className="fa fa-google-plus"></i>
                           </a>
                         </li>
-                        <li class="linkedin">
+                        <li className="linkedin">
                           <a href="#">
-                            <i class="fa fa-linkedin"></i>
+                            <i className="fa fa-linkedin"></i>
                           </a>
                         </li>
                       </ul>
@@ -237,61 +237,7 @@ export default function ProductModal({ product }) {
         </div>
       </div>
 
-      <div class="newletter-popup">
-        <div id="boxes" class="newletter-container">
-          <div id="dialog" class="window">
-            <div id="popup2">
-              <span class="b-close">
-                <span>close</span>
-              </span>
-            </div>
-            <div class="box">
-              <div class="newletter-title">
-                <h2>Newsletter</h2>
-              </div>
-              <div class="box-content newleter-content">
-                <label class="newletter-label">
-                  Enter your email address to subscribe our notification of our
-                  new post &amp; features by email.
-                </label>
-                <div id="frm_subscribe">
-                  <form name="subscribe" id="subscribe_popup">
-                    <input
-                      type="text"
-                      value=""
-                      name="subscribe_pemail"
-                      id="subscribe_pemail"
-                      placeholder="Enter you email address here..."
-                    />
-                    <input
-                      type="hidden"
-                      value=""
-                      name="subscribe_pname"
-                      id="subscribe_pname"
-                    />
-                    <div id="notification"></div>
-                    <a
-                      class="theme-btn-outlined"
-                      onclick="email_subscribepopup()"
-                    >
-                      <span>Subscribe</span>
-                    </a>
-                  </form>
-                  <div class="subscribe-bottom">
-                    <input
-                      type="checkbox"
-                      id="newsletter_popup_dont_show_again"
-                    />
-                    <label for="newsletter_popup_dont_show_again">
-                      Don't show this popup again
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     
     </div>
   );
 }

@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     return (
       <>
-        <footer class="footer_widgets">
-          <div class="footer_top">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                  <div class="widgets_container contact_us">
+        <footer className="footer_widgets">
+          <div className="footer_top">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-2 col-md-4 col-sm-6">
+                  <div className="widgets_container contact_us">
                     <h3>Opening Time</h3>
                     <p>
                       <span>Mon - Fri:</span> 8AM - 10PM
@@ -24,38 +25,36 @@ export default function Footer() {
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                  <div class="widgets_container widget_menu">
+                <div className="col-lg-2 col-md-3 col-sm-6">
+                  <div className="widgets_container widget_menu">
                     <h3>Information</h3>
-                    <div class="footer_menu">
+                    <div className="footer_menu">
                       <ul>
                         <li>
-                          <a href="about.html">About Us</a>
+                          <Link to="/about">About Us</Link>
                         </li>
                         <li>
-                          <a href="checkout.html">Checkout</a>
+                          <Link to="/checkout">Checkout</Link>
                         </li>
                         <li>
-                          <a href="contact.html">Contact</a>
+                          <Link to="/contact">Contact</Link>
                         </li>
+
                         <li>
-                          <a href="faq.html">Frequently Questions</a>
-                        </li>
-                        <li>
-                          <a href="wishlist.html">Wishlist</a>
+                          <Link to="/wishlist">Wishlist</Link>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4 col-md-5">
-                  <div class="widgets_container widget_app">
-                    <div class="footer_logo">
+                <div className="col-lg-4 col-md-5">
+                  <div className="widgets_container widget_app">
+                    <div className="footer_logo">
                       <a href="index.html">
-                        <img src="assets/img/logo/logo.png" alt="" />
+                        <img src="assets/img/logo/logo-w.png" alt="" />
                       </a>
                     </div>
-                    <div class="footer_widgetnav_menu">
+                    <div className="footer_widgetnav_menu">
                       <ul>
                         <li>
                           <a href="#">Payment</a>
@@ -71,31 +70,37 @@ export default function Footer() {
                         </li>
                       </ul>
                     </div>
-                    <div class="footer_social">
+                    <div className="footer_social">
                       <ul>
                         <li>
                           <a href="#">
-                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-facebook"
+                              aria-hidden="true"
+                            ></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                            <i className="fa fa-twitter" aria-hidden="true"></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-google-plus"
+                              aria-hidden="true"
+                            ></i>
                           </a>
                         </li>
                         <li>
                           <a href="#">
-                            <i class="fa fa-youtube" aria-hidden="true"></i>
+                            <i className="fa fa-youtube" aria-hidden="true"></i>
                           </a>
                         </li>
                       </ul>
                     </div>
-                    <div class="footer_app">
+                    <div className="footer_app">
                       <ul>
                         <li>
                           <a href="#">
@@ -111,55 +116,40 @@ export default function Footer() {
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                  <div class="widgets_container widget_menu">
+                <div className="col-lg-2 col-md-4 col-sm-6">
+                  <div className="widgets_container widget_menu">
                     <h3>My Account</h3>
-                    <div class="footer_menu">
+                    <div className="footer_menu">
                       <ul>
                         <li>
-                          <a href="my-account.html">My Account</a>
+                          <Link to="/account">My Account</Link>
                         </li>
                         <li>
-                          <a href="contact.html">Contact</a>
+                          <Link to="/contact">Contact</Link>
                         </li>
                         <li>
-                          <a href="cart.html">Shopping cart</a>
+                          <Link to="/cart">Shopping cart</Link>
                         </li>
                         <li>
-                          <a href="checkout.html">Checkout</a>
-                        </li>
-                        <li>
-                          <a href="shop.html">Shop</a>
-                        </li>
-                        <li>
-                          <a href="#">Order History</a>
+                          <Link to="/checkout">Checkout</Link>
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-2 col-md-4 col-sm-6">
-                  <div class="widgets_container widget_menu">
+                <div className="col-lg-2 col-md-4 col-sm-6">
+                  <div className="widgets_container widget_menu">
                     <h3>Customer Service</h3>
-                    <div class="footer_menu">
+                    <div className="footer_menu">
                       <ul>
                         <li>
-                          <a href="contact.html">Contact Us</a>
+                          <a href="#">Contact Us</a>
                         </li>
                         <li>
                           <a href="#">Terms of use</a>
                         </li>
                         <li>
                           <a href="#">Privacy Policy</a>
-                        </li>
-                        <li>
-                          <a href="contact.html">Site Map</a>
-                        </li>
-                        <li>
-                          <a href="my-account.html">My Account</a>
-                        </li>
-                        <li>
-                          <a href="#">Returns</a>
                         </li>
                       </ul>
                     </div>
@@ -169,22 +159,22 @@ export default function Footer() {
             </div>
           </div>
 
-          <div class="footer_bottom">
-            <div class="container">
-              <div class="row align-items-center">
-                <div class="col-lg-6 col-md-6">
-                  <div class="copyright_area">
-                    <p class="copyright-text">
-                      &copy; 2021 <a href="index.html">Lukani</a>. Made with{' '}
-                      <i class="fa fa-heart text-danger"></i> by{' '}
-                      <a href="https://hasthemes.com/" target="_blank">
-                        HasThemes
+          <div className="footer_bottom">
+            <div className="container">
+              <div className="row align-items-center">
+                <div className="col-lg-6 col-md-6">
+                  <div className="copyright_area">
+                    <p className="copyright-text">
+                      &copy; 2022  
+                      <i className="fa fa-heart text-danger"></i> by{' '}
+                      <a href="https://www.luzidcraft.com/" target="_blank">
+                        www.luzidcraft.com/
                       </a>{' '}
                     </p>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                  <div class="footer_payment">
+                <div className="col-lg-6 col-md-6">
+                  <div className="footer_payment">
                     <a href="#">
                       <img src="assets/img/icon/payment.png" alt="" />
                     </a>
@@ -193,8 +183,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
-            </footer>
-             
+        </footer>
       </>
     );
 }

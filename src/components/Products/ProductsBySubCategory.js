@@ -1,66 +1,59 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-  import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
- import NavBar from '../Layout/NavBar';
- import Breadcrumb from '../Common/Breadcrumb';
+import NavBar from '../Layout/NavBar';
+import Breadcrumb from '../Common/Breadcrumb';
 import Footer from '../Layout/Footer';
 import ProductFilter from '../Products/ProductFilter';
-  import Product from './Product';
+import Product from './Product';
 
- import { listProductsCategory } from '../../actions/productActions';
- 
+import { listProductsSubCategory } from '../../actions/productActions';
 
-const ProductByCategoryList = () => {
-
+const ProductsBySubCategory = () => {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
-  
-  const [priceRange, setPriceRange] = useState('')
+
+  const [priceRange, setPriceRange] = useState('');
   const [priceSort, setPriceSort] = useState('');
 
-   const productList = useSelector((state) => state.productList);
-   const { loading, error, products } = productList;
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
 
-    useEffect(() => {
-      dispatch(listProductsCategory(id));
-      if (priceRange || priceSort) setToUrl();
-    }, [priceRange, priceSort, id]);
-  
+  useEffect(() => {
+    dispatch(listProductsSubCategory(id));
+    if (priceRange || priceSort) setToUrl();
+
+    console.log('first', id);
+  }, [priceRange, priceSort, id]);
+
   let allProducts = products?.map((product) => <Product product={product} />);
-
-  
 
   const setToUrl = () => {
     let result = '?';
 
     if (priceRange) {
-   
       let text = `&price_range=${priceRange}`;
-       result = result.concat(text);
+      result = result.concat(text);
     }
 
-    
     if (priceSort) {
       let text = `&sort=${priceSort}`;
       result = result.concat(text);
     }
 
-      navigate(result);
- 
- 
-      dispatch(listProductsCategory(`${id}${result}`));
-  }
+    navigate(result);
+
+    dispatch(listProductsSubCategory(`${id}${result}`));
+  };
 
   const clearFilter = () => {
     let result = '';
-     navigate(result);
-  }
+    navigate(result);
+  };
 
-   
-  
   return (
     <div>
       {' '}
@@ -161,7 +154,6 @@ const ProductByCategoryList = () => {
       <Footer />
     </div>
   );
-}
+};
 
-
-export default ProductByCategoryList;
+export default ProductsBySubCategory;

@@ -29,7 +29,7 @@ export const addressCreateReducer = (state = {}, action) => {
         case ADDRES_ADD_REQUEST:
             return { loading: true };
         case ADDRES_ADD_SUCCESS:
-            return { loading: false, success: true, address: action.payload, };
+            return { loading: false, success: true, address_: action.payload };
         case ADDRES_ADD_FAIL:
             return { loading: false, error: action.payload, };
         case ADDRES_ADD_RESET:

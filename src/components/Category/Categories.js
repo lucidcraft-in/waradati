@@ -21,11 +21,11 @@ const  Categories =() => {
     <div>
       {' '}
       <NavBar />
-      <div class="breadcrumbs_area">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="breadcrumb_content">
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
                 <ul>
                   <li>
                     <Link to="/">home</Link>
@@ -37,32 +37,34 @@ const  Categories =() => {
           </div>
         </div>
       </div>
-      <div class="blog_details">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <div class="related_posts">
+      <div className="blog_details">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12 col-md-12">
+              <div className="related_posts">
                 <h3>Categories</h3>
-                <div class="row">
+                <div className="row">
                   {categories.map((category) => (
-                    <div class="col-lg-4 col-md-6 mt-2">
-                      <article class=" ">
+                    <div className="col-lg-4 col-md-6 mt-2">
+                      <article className=" ">
                         <figure>
-                          <div class="related_thumb">
-                            <a href="blog-details.html">
+                          <div className="related_thumb">
+                            <Link
+                              to={`/category/products/${category._id}`}
+                            >
                               {/* <img src="assets/img/blog/blog1.jpg" alt="" /> */}
                               <img
                                 src={`${process.env.REACT_APP_API_URL}/${category.image}`}
                                 alt=""
                               />
-                            </a>
+                            </Link>
                           </div>
-                          <figcaption class="related_content">
+                          <figcaption className="related_content">
                             <h4>
                               <a href="#">{category.categoryName}</a>
                             </h4>
-                            <div class="blog_meta">
-                              <span class="author">
+                            <div className="blog_meta">
+                              <span className="author">
                                 <a href="#">{category.title}</a>
                               </span>
                             </div>

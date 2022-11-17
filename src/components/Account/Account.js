@@ -43,65 +43,65 @@ export default function Account({ history }) {
     <div>
       {' '}
       <NavBar />
-      <div class="breadcrumbs_area">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="breadcrumb_content">
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
                 <ul>
                   <li>
-                    <a href="index.html">home</a>
+                    <Link to="/">home</Link>
                   </li>
-                  <li>shop right sidebar</li>
+                  <li>Account</li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section class="main_content_area">
-        <div class="container">
-          <div class="account_dashboard">
-            <div class="row">
-              <div class="col-sm-12 col-md-3 col-lg-3">
-                <div class="dashboard_tab_button">
-                  <ul role="tablist" class="nav flex-column dashboard-list">
+      <section className="main_content_area">
+        <div className="container">
+          <div className="account_dashboard">
+            <div className="row">
+              <div className="col-sm-12 col-md-3 col-lg-3">
+                <div className="dashboard_tab_button">
+                  <ul role="tablist" className="nav flex-column dashboard-list">
                     <li>
                       <a
                         href="#dashboard"
                         data-bs-toggle="tab"
-                        class="nav-link active"
+                        className="nav-link active"
                       >
                         Dashboard
                       </a>
                     </li>
                     <li>
                       {' '}
-                      <a href="#orders" data-bs-toggle="tab" class="nav-link">
+                      <a href="#orders" data-bs-toggle="tab" className="nav-link">
                         Orders
                       </a>
                     </li>
              
                     <li>
-                      <a href="#address" data-bs-toggle="tab" class="nav-link">
+                      <a href="#address" data-bs-toggle="tab" className="nav-link">
                         Addresses
                       </a>
                     </li>
                   
                     <li>
-                    <Link onClick={logoutHandler} to="" class="nav-link">
+                    <Link onClick={logoutHandler} to="" className="nav-link">
                                 Logout
                               </Link>
-                      {/* <a onClick={logoutHandler} class="nav-link">
+                      {/* <a onClick={logoutHandler} className="nav-link">
                         logout
                       </a> */}
                     </li>
                   </ul>
                 </div>
               </div>
-              <div class="col-sm-12 col-md-9 col-lg-9">
-                <div class="tab-content dashboard_content">
-                  <div class="tab-pane fade show active" id="dashboard">
+              <div className="col-sm-12 col-md-9 col-lg-9">
+                <div className="tab-content dashboard_content">
+                  <div className="tab-pane fade show active" id="dashboard">
                     <h3>Dashboard </h3>
                     <p>
                       From your account dashboard. you can easily check &amp;
@@ -109,10 +109,10 @@ export default function Account({ history }) {
                       <a href="#">shipping and billing addresses</a> 
                     </p>
                   </div>
-                  <div class="tab-pane fade" id="orders">
+                  <div className="tab-pane fade" id="orders">
                     <h3>Orders</h3>
-                    <div class="table-responsive">
-                      <table class="table">
+                    <div className="table-responsive">
+                      <table className="table">
                         <thead>
                           <tr>
                             <th>Order</th>
@@ -137,7 +137,7 @@ export default function Account({ history }) {
                                 )}
                               </td>
                               <td>
-                                <span class="success">
+                                <span className="success">
                                   {order.isDelivered === true
                                     ? ' Completed'
                                     : ' Processing'}{' '}
@@ -148,7 +148,7 @@ export default function Account({ history }) {
                                 {order.data.quantity} item{' '}
                               </td>
                               <td>
-                              <Link to={`/order/${order.orderId}`} class="view">  view</Link>
+                              <Link to={`/order/${order.orderId}`} className="view">  view</Link>
                               
                               </td>
                             </tr>
@@ -158,15 +158,15 @@ export default function Account({ history }) {
                     </div>
                   </div>
               
-                  <div class="tab-pane" id="address">
+                  <div className="tab-pane" id="address">
                     <p>
                       The following addresses will be used on the checkout page
                       by default.
                     </p>
-                    <h4 class="billing-address">Billing address</h4>
+                    <h4 className="billing-address">Billing address</h4>
                     {address.billingAddress?.map((billAddress) => (
                       <div>
-                        <a href="#" class="view">
+                        <a href="#" className="view">
                           Edit
                         </a>
                         <p>
@@ -205,10 +205,10 @@ export default function Account({ history }) {
                       </div>
                     ))}
 
-                    <h4 class="billing-address">Shipping address</h4>
+                    <h4 className="billing-address">Shipping address</h4>
                     {address.shippingAddress?.map((shippAddress) => (
                       <div>
-                        <a href="#" class="view">
+                        <a href="#" className="view">
                           Edit
                         </a>
                         <p>

@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+a {
+  color: #282c34 !important;
+}
+
+.cart-div-height{
+  height: 60vh;
+  scroll-behavior: smooth;
+  overflow-y: scroll ;
+  width: 100%;
+  
+}
+.cart-div-height::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.checkout-address-phone{
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: rgb(39, 39, 136);
+}
