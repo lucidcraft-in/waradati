@@ -56,7 +56,7 @@ setData(data.products);
                         <div className="product_thumb">
                           <a className="primary_img">
                             <img
-                              src={`${process.env.REACT_APP_API_URL}/${
+                              src={`${
                                 prod.product_items &&
                                 prod.product_items[0].images[0].url
                               } `}

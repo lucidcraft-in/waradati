@@ -54,7 +54,7 @@ const  Categories =() => {
                             >
                               {/* <img src="assets/img/blog/blog1.jpg" alt="" /> */}
                               <img
-                                src={`${process.env.REACT_APP_API_URL}/${category.image}`}
+                                src={`${category.image}`}
                                 alt=""
                               />
                             </Link>

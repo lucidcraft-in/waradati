@@ -47,7 +47,7 @@ const CartModal =({
                 <div className="cart_img">
                   <a href="#">
                     <img
-                      src={`${process.env.REACT_APP_API_URL}/${cart.image}`}
+                      src={`${cart.image}`}
                       alt=""
                     />
                   </a>

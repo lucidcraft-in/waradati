@@ -108,7 +108,7 @@ export default function WishList({ history }) {
                               <td className="product_thumb">
                                 <a href="#">
                                   <img
-                                    src={`${process.env.REACT_APP_API_URL}/${wishlist?.items[0]?.images[0]?.url}`}
+                                    src={`${wishlist?.items[0]?.images[0]?.url}`}
                                     alt=""
                                   />
                                 </a>

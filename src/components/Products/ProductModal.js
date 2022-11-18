@@ -50,7 +50,7 @@ export default function ProductModal({ product }) {
                         <div className="modal_tab_img">
                           <a href="#">
                              <img  src=
-                            {`${process.env.REACT_APP_API_URL}/${images.url}`}/> 
+                            {`${images.url}`}/> 
                            
                           </a>
                         </div>
