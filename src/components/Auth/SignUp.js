@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../../actions/userActions'
 import { useNavigate,Link  } from "react-router-dom";
+import NavBar from '../Layout/NavBar';
+import Footer from '../Layout/Footer';
 const SignUp = ({ }) => {  
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -24,6 +26,7 @@ const SignUp = ({ }) => {
   return (
     <div>
       {' '}
+      <NavBar />
       <div className="customer_login">
         <div className="container">
           <div className="row">
@@ -34,21 +37,33 @@ const SignUp = ({ }) => {
                 <form onSubmit={submitHandler}>
                   <p>
                     <label>
-                      Username  <span>*</span>
+                      Username <span>*</span>
                     </label>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                   </p>
                   <p>
                     <label>
-                      email  <span>*</span>
+                      email <span>*</span>
                     </label>
-                    <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </p>
                   <p>
                     <label>
                       Passwords <span>*</span>
                     </label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </p>
                   <div className="login_submit">
                     <a href="#">Lost your password?</a>
@@ -65,6 +80,7 @@ const SignUp = ({ }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

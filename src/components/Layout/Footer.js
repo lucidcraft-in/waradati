@@ -12,17 +12,9 @@ export default function Footer() {
                   <div className="widgets_container contact_us">
                     <h3>Opening Time</h3>
                     <p>
-                      <span>Mon - Fri:</span> 8AM - 10PM
+                      <span>24 Hour</span>
                     </p>
-                    <p>
-                      <span>Sat:</span> 9AM-8PM
-                    </p>
-                    <p>
-                      <span>Suns:</span> 14hPM-18hPM
-                    </p>
-                    <p>
-                      <b>We Work All The Holidays</b>
-                    </p>
+                     
                   </div>
                 </div>
                 <div className="col-lg-2 col-md-3 col-sm-6">

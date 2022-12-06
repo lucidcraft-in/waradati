@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/userActions'
 import { useNavigate,Link  } from "react-router-dom";
+import NavBar from '../Layout/NavBar';
+import Footer from '../Layout/Footer';
 const Login = ({ location }) => {  
   const navigate = useNavigate();
   const [email, setEmail] = useState('')
@@ -23,6 +25,7 @@ const Login = ({ location }) => {
   return (
     <div>
       {' '}
+      <NavBar />
       <div className="customer_login">
         <div className="container">
           <div className="row">
@@ -35,21 +38,27 @@ const Login = ({ location }) => {
                     <label>
                       Username or email <span>*</span>
                     </label>
-                    <input type="text"  value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
                   </p>
                   <p>
                     <label>
                       Passwords <span>*</span>
                     </label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
                   </p>
                   <div className="login_submit">
-                 
-                   
-                        <Link to="/signup">
-                        <button  >Sign up</button>
-                        </Link>
-                    
+                    <Link to="/signup">
+                      <button>Sign up</button>
+                    </Link>
+
                     <label for="remember">
                       <input id="remember" type="checkbox" />
                       Remember me
@@ -63,6 +72,7 @@ const Login = ({ location }) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

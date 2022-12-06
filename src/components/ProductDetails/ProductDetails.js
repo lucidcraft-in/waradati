@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
+ 
 
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
@@ -23,6 +24,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const myRef = useRef(null);
+   const navigate = useNavigate();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -54,11 +56,15 @@ const ProductDetails = () => {
 
   const addToCart = (e) => {
     e.preventDefault();
-
-    if (!selectStockItem) {
-      message.error('Please select stock item', 3);
-      return;
+  if (!userInfo) {
+    return navigate('/login');
     }
+      if (!selectStockItem) {
+        message.error('Please select stock item', 3);
+        return;
+      }
+
+   
 
     let data_ = {
       userId: userInfo._id,
@@ -179,7 +185,7 @@ const ProductDetails = () => {
                   <div className="product_desc">
                     <p>{product.description}</p>
                   </div>
-                  <div className="widget_list widget_manu">
+                  <div className="widget_list widget_manu ">
                     <h3>STOCKS</h3>
                     <ul>
                       {product.stock_items &&

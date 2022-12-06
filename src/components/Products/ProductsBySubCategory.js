@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
 import NavBar from '../Layout/NavBar';
 import Breadcrumb from '../Common/Breadcrumb';
@@ -14,6 +14,7 @@ import { listProductsSubCategory } from '../../actions/productActions';
 const ProductsBySubCategory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { id } = useParams();
 
   const [priceRange, setPriceRange] = useState('');
@@ -25,9 +26,7 @@ const ProductsBySubCategory = () => {
   useEffect(() => {
     dispatch(listProductsSubCategory(id));
     if (priceRange || priceSort) setToUrl();
-
-    console.log('first', id);
-  }, [priceRange, priceSort, id]);
+  }, [priceRange, priceSort, id, searchParams]);
 
   let allProducts = products?.map((product) => <Product product={product} />);
 
@@ -44,15 +43,21 @@ const ProductsBySubCategory = () => {
       result = result.concat(text);
     }
 
+  
+
+  
+
     navigate(result);
 
     dispatch(listProductsSubCategory(`${id}${result}`));
   };
-
+ 
   const clearFilter = () => {
     let result = '';
     navigate(result);
   };
+
+ 
 
   return (
     <div>

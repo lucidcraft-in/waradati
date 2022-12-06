@@ -36,7 +36,7 @@ export default function Cart({ history }) {
     if (success) {
       navigate('/cart');
     }
-    if (!cartLists) dispatch(cartListByUser(userInfo._id));
+    if (!cartLists) dispatch(cartListByUser(userInfo?._id));
 
     cartTotalFunc();
   }, [dispatch, history, userInfo, success, cartLists]);

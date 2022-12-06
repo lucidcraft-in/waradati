@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+
+import { message } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import $, { map } from 'jquery';
@@ -17,11 +19,14 @@ import CartModal from '../Cart/CartModal';
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+const [searchParams, setSearchParams] = useSearchParams();
+
+
   const [cartModalActive, setActiveModal] = useState('');
  
 
   const [categorySearch, setCategorySearch] = useState('')
-  const [searchName, setSearchName] = useState('');
+  const [searchName, setSearchName] = useState(searchParams.get('spn'));
 
 
   const cartList = useSelector((state) => state.cartLists);
@@ -66,6 +71,8 @@ const NavBar = () => {
 
   }, [dispatch, success]);
 
+   
+
   const setCategoriesModalDisplay = (e) => {
     e.preventDefault();
     $(this).toggleClass('active');
@@ -85,8 +92,15 @@ const NavBar = () => {
     }
   };
 
-  const searchHere = () => {
-        let url = `/category/products/${categorySearch}&spn=${searchName}`;
+  const searchHere = (e) => {
+    e.preventDefault();
+
+    if (categorySearch === '') {
+      message.error('Please select category', 3);
+      return;
+     
+    }
+        let url = `/category/products/${categorySearch}?spn=${searchName}`;
 
      navigate(url);
   }
@@ -212,7 +226,7 @@ const NavBar = () => {
                           <a href="#">Shop Layouts</a>
                           <ul className="sub-menu">
                             <li>
-                              <a href="shop.html">shop</a>
+                              <a href="#">shop</a>
                             </li>
                             <li>
                               <a href="shop-fullwidth.html">Full Width</a>
@@ -426,16 +440,17 @@ const NavBar = () => {
                 <div className="col-lg-9 col-md-6 col-6">
                   <div className="header_right_info">
                     <div className="search_container">
-                      <form>
+                      <form action='#'>
                         <div className="hover_category">
                           <select
                             className="select_option"
                             name="categorySearch"
                             value={categorySearch}
                             onChange={(e) => setCategorySearch(e.target.value)}
+                             
                           >
                             <option selected value="">
-                              All Categories
+                              Select category
                             </option>
                             {categories.map((category) => (
                               <option value={category._id}>
@@ -452,7 +467,7 @@ const NavBar = () => {
                             name="searchName"
                             onChange={(e) => setSearchName(e.target.value)}
                           />
-                          <button onClick={(e) => searchHere()}>
+                          <button onClick={(e) => searchHere(e)}>
                             <i className="icon-search"></i>
                           </button>
                         </div>

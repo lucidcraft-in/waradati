@@ -74,7 +74,7 @@ const Home =()=> {
             <div className="col-lg-6 col-md-6">
               <figure className="single_banner">
                 <div className="banner_thumb">
-                  <a href="shop.html">
+                  <a href="#">
                     <img src={banner1} alt="" />
                   </a>
                   <div className="banner_content">
@@ -82,7 +82,7 @@ const Home =()=> {
                     <h2>
                       Plants <br /> For Interior
                     </h2>
-                    <a href="shop.html">Shop Now</a>
+                    <a href="#">Shop Now</a>
                   </div>
                 </div>
               </figure>
@@ -90,7 +90,7 @@ const Home =()=> {
             <div className="col-lg-6 col-md-6">
               <figure className="single_banner">
                 <div className="banner_thumb">
-                  <a href="shop.html">
+                  <a href="#">
                     <img src={banner2} alt="" />
                   </a>
                   <div className="banner_content">
@@ -98,7 +98,7 @@ const Home =()=> {
                     <h2>
                       Plants <br /> For Healthy
                     </h2>
-                    <a href="shop.html">Shop Now</a>
+                    <a href="#">Shop Now</a>
                   </div>
                 </div>
               </figure>

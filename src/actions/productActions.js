@@ -30,12 +30,14 @@ export const listProductsCategory = (id) => async (
   try {
   
     dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
-
+ console.log('first', `/api/products/category/${id}`);
     const { data } = await Axios.get(
-      `/api/products/category/${id}?`
+      `/api/products/category/${id}`
     );
- 
+    console.log(data);
+    
    
+ 
     dispatch({
       type: PRODUCT_LIST_BY_CATEGORY_SUCCESS,
       payload: data,

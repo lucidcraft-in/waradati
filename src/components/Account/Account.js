@@ -39,6 +39,8 @@ export default function Account({ history }) {
     dispatch(logout());
   };
 
+  console.log(address);
+
   return (
     <div>
       {' '}
@@ -70,28 +72,40 @@ export default function Account({ history }) {
                       <a
                         href="#dashboard"
                         data-bs-toggle="tab"
-                        className="nav-link active"
+                        className="nav-link active font-white"
                       >
                         Dashboard
                       </a>
                     </li>
                     <li>
                       {' '}
-                      <a href="#orders" data-bs-toggle="tab" className="nav-link">
+                      <a
+                        href="#orders"
+                        data-bs-toggle="tab"
+                        className="nav-link font-white"
+                      >
                         Orders
                       </a>
                     </li>
-             
+
                     <li>
-                      <a href="#address" data-bs-toggle="tab" className="nav-link">
+                      <a
+                        href="#address"
+                        data-bs-toggle="tab"
+                        className="nav-link font-white"
+                      >
                         Addresses
                       </a>
                     </li>
-                  
+
                     <li>
-                    <Link onClick={logoutHandler} to="" className="nav-link">
-                                Logout
-                              </Link>
+                      <Link
+                        onClick={logoutHandler}
+                        to=""
+                        className="nav-link font-white"
+                      >
+                        Logout
+                      </Link>
                       {/* <a onClick={logoutHandler} className="nav-link">
                         logout
                       </a> */}
@@ -106,7 +120,7 @@ export default function Account({ history }) {
                     <p>
                       From your account dashboard. you can easily check &amp;
                       view your <a href="#">recent orders</a>, manage your{' '}
-                      <a href="#">shipping and billing addresses</a> 
+                      <a href="#">shipping and billing addresses</a>
                     </p>
                   </div>
                   <div className="tab-pane fade" id="orders">
@@ -148,8 +162,13 @@ export default function Account({ history }) {
                                 {order.data.quantity} item{' '}
                               </td>
                               <td>
-                              <Link to={`/order/${order.orderId}`} className="view">  view</Link>
-                              
+                                <Link
+                                  to={`/order/${order.orderId}`}
+                                  className="view"
+                                >
+                                  {' '}
+                                  view
+                                </Link>
                               </td>
                             </tr>
                           ))}
@@ -157,99 +176,60 @@ export default function Account({ history }) {
                       </table>
                     </div>
                   </div>
-              
+
                   <div className="tab-pane" id="address">
                     <p>
                       The following addresses will be used on the checkout page
                       by default.
                     </p>
-                    <h4 className="billing-address">Billing address</h4>
-                    {address.billingAddress?.map((billAddress) => (
-                      <div>
-                        <a href="#" className="view">
-                          Edit
-                        </a>
-                        <p>
-                          <strong>
-                            {billAddress.firstName} {billAddress.lastName}
-                          </strong>
-                        </p>
-                        <address>
-                          <span>
-                            <strong>Address:</strong> {billAddress.address1}
-                          </span>
-                          , <br />
-                          <span>
-                            <strong>Appartment:</strong> {billAddress.apartment}
-                          </span>
-                          , <br />
-                          <span>
-                            <strong>City:</strong> {billAddress.city}
-                          </span>
-                          ,
-                          <br />
-                          <span>
-                            <strong>State:</strong> {billAddress.region}
-                          </span>
-                          ,
-                          <br />
-                          <span>
-                            <strong>ZIP:</strong> {billAddress.zip}
-                          </span>
-                          ,
-                          <br />
-                          <span>
-                            <strong>Country:</strong> {billAddress.country}
-                          </span>
-                        </address>
-                      </div>
-                    ))}
 
                     <h4 className="billing-address">Shipping address</h4>
-                    {address.shippingAddress?.map((shippAddress) => (
+                    <hr />
+                    {address?.map((address) => (
                       <div>
-                        <a href="#" className="view">
-                          Edit
-                        </a>
                         <p>
                           <strong>
-                            {shippAddress.firstName} {shippAddress.lastName}
+                            {address.shippingAddress.firstName}{' '}
+                            {address.shippingAddress.lastName}
                           </strong>
                         </p>
                         <address>
                           <span>
-                            <strong>Address:</strong> {shippAddress.address1}
+                            <strong>Address:</strong>{' '}
+                            {address.shippingAddress.address1}
                           </span>
                           , <br />
                           <span>
                             <strong>Appartment:</strong>{' '}
-                            {shippAddress.apartment}
+                            {address.shippingAddress.apartment}
                           </span>
                           , <br />
                           <span>
-                            <strong>City:</strong> {shippAddress.city}
+                            <strong>City:</strong>{' '}
+                            {address.shippingAddress.city}
                           </span>
                           ,
                           <br />
                           <span>
-                            <strong>State:</strong> {shippAddress.region}
+                            <strong>State:</strong>{' '}
+                            {address.shippingAddress.region}
                           </span>
                           ,
                           <br />
                           <span>
-                            <strong>ZIP:</strong> {shippAddress.zip}
+                            <strong>ZIP:</strong> {address.shippingAddress.zip}
                           </span>
                           ,
                           <br />
                           <span>
-                            <strong>Country:</strong> {shippAddress.country}
+                            <strong>Country:</strong>{' '}
+                            {address.shippingAddress.country}
                           </span>
                         </address>
+                        <hr />
                       </div>
                     ))}
                   </div>
-
-
                 </div>
               </div>
             </div>

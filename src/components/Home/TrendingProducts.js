@@ -25,6 +25,8 @@ const TendingProducts = () => {
     useEffect(() => {
       dispatch(trendingProductsAction());
     }, []);
+  
+  console.log(trendingProducts);
  
    
   return (

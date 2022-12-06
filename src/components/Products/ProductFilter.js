@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function ProductFilter({ setPriceRange, clearFilter }) {
+export default function ProductFilter({ setUrlOnFilter, clearFilter }) {
   return (
     <div className="col-lg-3 col-md-12">
       <aside className="sidebar_widget">
@@ -15,7 +15,8 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
                     id="under_50"
                     name="price_range"
                     value="0-50"
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    defaultValue={true}
+                    onChange={(e) => setUrlOnFilter(e, false, true)}
                   />
                   &nbsp;&nbsp; &nbsp; UNDER AED 50
                 </a>
@@ -27,7 +28,7 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
                     id="50-70"
                     name="price_range"
                     value="50-70"
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    onChange={(e) => setUrlOnFilter(e, false, true)}
                   />
                   &nbsp;&nbsp; &nbsp; AED 50-70
                 </a>
@@ -39,7 +40,7 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
                     id="70-90"
                     name="price_range"
                     value="70-90"
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    onChange={(e) => setUrlOnFilter(e, false, true)}
                   />
                   &nbsp;&nbsp; &nbsp; AED 70-90
                 </a>
@@ -51,7 +52,7 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
                     id="90-150"
                     name="price_range"
                     value="90-150"
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    onChange={(e) => setUrlOnFilter(e, false, true)}
                   />
                   &nbsp;&nbsp; &nbsp; AED 90-150
                 </a>
@@ -62,8 +63,8 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
                     type="radio"
                     id="above_150"
                     name="price_range"
-                    value="150"
-                    onChange={(e) => setPriceRange(e.target.value)}
+                    value="150-0"
+                    onChange={(e) => setUrlOnFilter(e, false, true)}
                   />
                   &nbsp;&nbsp; &nbsp; ABOVE AED 150
                 </a>
@@ -77,7 +78,6 @@ export default function ProductFilter({ setPriceRange, clearFilter }) {
               <input type="text" name="text" id="amount" />
             </form>
           </div>
-         
         </div>
       </aside>
     </div>

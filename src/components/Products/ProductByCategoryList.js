@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-  import { useParams, useNavigate } from 'react-router-dom';
+  import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 
  import NavBar from '../Layout/NavBar';
  import Breadcrumb from '../Common/Breadcrumb';
@@ -10,6 +10,7 @@ import ProductFilter from '../Products/ProductFilter';
   import Product from './Product';
 
  import { listProductsCategory } from '../../actions/productActions';
+import Spinner from '../Common/Spinner';
  
 
 const ProductByCategoryList = () => {
@@ -17,23 +18,28 @@ const ProductByCategoryList = () => {
   const dispatch = useDispatch();
     const navigate = useNavigate();
   const { id } = useParams();
+   const [searchParams, setSearchParams] = useSearchParams();
   
   const [priceRange, setPriceRange] = useState('')
-  const [priceSort, setPriceSort] = useState('');
+  const [priceSort, setPriceSort] = useState(searchParams.get('price_range'));
+  const [searchCategory, setSearchCategory] = useState(searchParams.get('spn'));
 
    const productList = useSelector((state) => state.productList);
    const { loading, error, products } = productList;
 
-    useEffect(() => {
-      dispatch(listProductsCategory(id));
-      if (priceRange || priceSort) setToUrl();
-    }, [priceRange, priceSort, id]);
+  useEffect(() => {
+    dispatch(listProductsCategory(id));
+  
+    if (priceRange || priceSort || searchParams.get('spn')) setToUrl();
+  }, [priceRange, priceSort, id, searchParams.get('spn')]);
   
   let allProducts = products?.map((product) => <Product product={product} />);
 
+ 
   
 
   const setToUrl = () => {
+      
     let result = '?';
 
     if (priceRange) {
@@ -47,23 +53,42 @@ const ProductByCategoryList = () => {
       let text = `&sort=${priceSort}`;
       result = result.concat(text);
     }
+   
 
+      if (searchParams.get('spn')) {
+        let text = `&spn=${searchParams.get('spn')}`;
+        result = result.concat(text);
+      }
+
+    
+   
+    
+ 
+    dispatch(listProductsCategory(`${id}${result}`));
+    
       navigate(result);
- 
- 
-      dispatch(listProductsCategory(`${id}${result}`));
   }
 
   const clearFilter = () => {
     let result = '';
      navigate(result);
   }
+  
 
+
+  const setUrlOnFilter = (e, sort=false, filter=false) =>
+  {
+    if (sort === true) setPriceSort(e.target.value);
+    
+    if (filter === true)setPriceRange(e.target.value);
+      
+      setToUrl();
+}
    
   
   return (
     <div>
-      {' '}
+      {loading === true ? <Spinner /> : ''}
       <NavBar />
       <div className="breadcrumbs_area">
         <div className="container">
@@ -95,7 +120,7 @@ const ProductByCategoryList = () => {
                     title="3"
                   ></button>
 
-                  <button
+                  {/* <button
                     data-role="grid_4"
                     type="button"
                     className=" btn-grid-4"
@@ -109,14 +134,14 @@ const ProductByCategoryList = () => {
                     className="btn-list"
                     data-bs-toggle="tooltip"
                     title="List"
-                  ></button>
+                  ></button> */}
                 </div>
                 <div className=" niceselect_option">
                   <form className="select_option" action="#">
                     <select
                       name="orderby"
                       className="form-select"
-                      onChange={(e) => setPriceSort(e.target.value)}
+                      onChange={(e) => setUrlOnFilter(e, true, false)}
                     >
                       <option value="">Sort</option>
                       <option value="asc">Sort by price: low to high</option>
@@ -128,31 +153,38 @@ const ProductByCategoryList = () => {
                   <p>Showing 1–9 of 21 results</p>
                 </div>
               </div>
+              {products?.length != 0 ? (
+                <span>
+                  <div className="row shop_wrapper ">{allProducts}</div>
 
-              <div className="row shop_wrapper">{allProducts}</div>
-
-              <div className="shop_toolbar t_bottom">
-                <div className="pagination">
-                  <ul>
-                    <li className="current">1</li>
-                    <li>
-                      <a href="#">2</a>
-                    </li>
-                    <li>
-                      <a href="#">3</a>
-                    </li>
-                    <li className="next">
-                      <a href="#">next</a>
-                    </li>
-                    <li>
-                      <a href="#"></a>
-                    </li>
-                  </ul>
+                  <div className="shop_toolbar t_bottom">
+                    <div className="pagination">
+                      <ul>
+                        <li className="current">1</li>
+                        <li>
+                          <a href="#">2</a>
+                        </li>
+                        <li>
+                          <a href="#">3</a>
+                        </li>
+                        <li className="next">
+                          <a href="#">next</a>
+                        </li>
+                        <li>
+                          <a href="#"></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </span>
+              ) : (
+                <div className="alert alert-warning" role="alert">
+                 No data available!
                 </div>
-              </div>
+              )}
             </div>
             <ProductFilter
-              setPriceRange={setPriceRange}
+              setUrlOnFilter={setUrlOnFilter}
               clearFilter={clearFilter}
             />
           </div>
