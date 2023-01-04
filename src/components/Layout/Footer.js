@@ -1,39 +1,34 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+
+  const { t } = useTranslation();
     return (
       <>
         <footer className="footer_widgets">
           <div className="footer_top">
             <div className="container">
               <div className="row">
-                <div className="col-lg-2 col-md-4 col-sm-6">
-                  <div className="widgets_container contact_us">
-                    <h3>Opening Time</h3>
-                    <p>
-                      <span>24 Hour</span>
-                    </p>
-                     
-                  </div>
-                </div>
+                <div className="col-lg-2 col-md-4 col-sm-6"></div>
                 <div className="col-lg-2 col-md-3 col-sm-6">
                   <div className="widgets_container widget_menu">
-                    <h3>Information</h3>
+                    <h3>{t('information')}</h3>
                     <div className="footer_menu">
                       <ul>
                         <li>
-                          <Link to="/about">About Us</Link>
+                          <Link to="/about">{t('about_us')}</Link>
                         </li>
                         <li>
-                          <Link to="/checkout">Checkout</Link>
+                          <Link to="/checkout">{t('checkout')}</Link>
                         </li>
                         <li>
-                          <Link to="/contact">Contact</Link>
+                          <Link to="/contact">{t('contact_us')}</Link>
                         </li>
 
                         <li>
-                          <Link to="/wishlist">Wishlist</Link>
+                          <Link to="/wishlist">{t('wishlist')}</Link>
                         </li>
                       </ul>
                     </div>
@@ -49,16 +44,16 @@ export default function Footer() {
                     <div className="footer_widgetnav_menu">
                       <ul>
                         <li>
-                          <a href="#">Payment</a>
+                          <a href="#">{t('ubiquity')}</a>
                         </li>
                         <li>
-                          <a href="#">Affiliates</a>
+                          <a href="#">{t('global_Reach')}</a>
                         </li>
                         <li>
-                          <a href="#">Contact</a>
+                          <a href="#">{t('interactivity')}</a>
                         </li>
                         <li>
-                          <a href="#">Internet</a>
+                          <a href="#">{t('richness')}</a>
                         </li>
                       </ul>
                     </div>
@@ -110,20 +105,20 @@ export default function Footer() {
                 </div>
                 <div className="col-lg-2 col-md-4 col-sm-6">
                   <div className="widgets_container widget_menu">
-                    <h3>My Account</h3>
+                    <h3>{t('my_account')}</h3>
                     <div className="footer_menu">
                       <ul>
                         <li>
-                          <Link to="/account">My Account</Link>
+                          <Link to="/account">{t('my_account')}</Link>
                         </li>
                         <li>
-                          <Link to="/contact">Contact</Link>
+                          <Link to="/contact">{t('contact_us')}</Link>
                         </li>
                         <li>
-                          <Link to="/cart">Shopping cart</Link>
+                          <Link to="/cart">{t('shopping_cart')}</Link>
                         </li>
                         <li>
-                          <Link to="/checkout">Checkout</Link>
+                          <Link to="/checkout">{t('checkout')}</Link>
                         </li>
                       </ul>
                     </div>
@@ -131,17 +126,17 @@ export default function Footer() {
                 </div>
                 <div className="col-lg-2 col-md-4 col-sm-6">
                   <div className="widgets_container widget_menu">
-                    <h3>Customer Service</h3>
+                    <h3>{t('customer_service')}</h3>
                     <div className="footer_menu">
                       <ul>
                         <li>
-                          <a href="#">Contact Us</a>
+                          <a href="#">{t('contact_us')}</a>
                         </li>
                         <li>
-                          <a href="#">Terms of use</a>
+                          <a href="#">{t('terms')}</a>
                         </li>
                         <li>
-                          <a href="#">Privacy Policy</a>
+                          <a href="#">{t('privacy')}</a>
                         </li>
                       </ul>
                     </div>
@@ -157,7 +152,7 @@ export default function Footer() {
                 <div className="col-lg-6 col-md-6">
                   <div className="copyright_area">
                     <p className="copyright-text">
-                      &copy; 2022  
+                      &copy; 2022
                       <i className="fa fa-heart text-danger"></i> by{' '}
                       <a href="https://www.luzidcraft.com/" target="_blank">
                         www.luzidcraft.com/

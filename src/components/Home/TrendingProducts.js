@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'swiper';
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom';
 
 import { trendingProductsAction } from '../../actions/homePageActions';
@@ -14,7 +15,7 @@ import './products.css';
 
 const TendingProducts = () => {
   
-
+ const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const trendingProductsList = useSelector(
@@ -36,7 +37,7 @@ const TendingProducts = () => {
           <div className="row">
             <div className="col-12">
               <div className="section_title">
-                <h2>Trending Products</h2>
+                <h2>{t('trending_products')}</h2>
               </div>
             </div>
           </div>
@@ -67,12 +68,10 @@ const TendingProducts = () => {
                                 />
                               </a>
                               <div className="label_product">
-                                
-                                  <span className="label_sale">
-                                    AED {product.price - product.sellingPrice}{' '}
-                                    <span className="saved">you saved</span>
-                                  </span>
-                               
+                                <span className="label_sale">
+                                  AED {product.price - product.sellingPrice}{' '}
+                                  <span className="saved">you saved</span>
+                                </span>
                               </div>
                               <div className="product_timing">
                                 <div data-countdown="2022/12/15"></div>

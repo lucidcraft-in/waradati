@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+ import { useTranslation } from 'react-i18next';
 import { createProductReview } from '../../actions/productActions';
   import Reviews from '../Common/Reviews';
 
 const ProductInfo = ({ data }) => {
+ const { t } = useTranslation();
+
    const dispatch = useDispatch();
   
   const [rating, setRating] = useState(0);
@@ -42,6 +44,8 @@ const ProductInfo = ({ data }) => {
     
   }
  
+
+ 
  
   
   return (
@@ -61,7 +65,7 @@ const ProductInfo = ({ data }) => {
                       aria-controls="info"
                       aria-selected="false"
                     >
-                      Product Details
+                      {t('product_details')}
                     </a>
                   </li>
 
@@ -73,7 +77,7 @@ const ProductInfo = ({ data }) => {
                       aria-controls="reviews"
                       aria-selected="false"
                     >
-                      Reviews ({data?.reviews?.length})
+                      {t('reviews')} ({data?.reviews?.length})
                     </a>
                   </li>
                 </ul>
@@ -116,15 +120,12 @@ const ProductInfo = ({ data }) => {
                     {isReviewed === false ? (
                       <span>
                         <div className="comment_title">
-                          <h2>Add a review </h2>
-                          <p>
-                            Your email address will not be published. Required
-                            fields are marked{' '}
-                          </p>
+                          <h2> {t('add_a_review')}</h2>
+                          <p>{t('your_email_not')}</p>
                         </div>
 
                         <div className="product_ratting mb-10">
-                          <h3>Your rating</h3>
+                          <h3>{t('your_rating')}</h3>
                           <ul>
                             <li>
                               <a

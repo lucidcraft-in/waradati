@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 import NavBar from '../Layout/NavBar';
 import Slider from './Slider';
@@ -15,7 +16,10 @@ import shipping3 from './img/shipping3.jpg';
 import banner1 from './img/banner1.jpg';
 import banner2 from './img/banner2.jpg';
 
-const Home =()=> {
+const Home = () => {
+  
+  const { t } = useTranslation();
+  
   return (
     <div>
       <NavBar />
@@ -29,11 +33,8 @@ const Home =()=> {
                   <img src={shipping1} alt="" />
                 </div>
                 <div className="shipping_content">
-                  <h3>Free Delivery</h3>
-                  <p>
-                    Free shipping around the world for all <br /> orders over
-                    $120
-                  </p>
+                  <h3> {t('fast_delivery')}</h3>
+                  <p>{t('fast_defast_delivery_desclivery')}</p>
                 </div>
               </div>
             </div>
@@ -43,11 +44,8 @@ const Home =()=> {
                   <img src={shipping2} alt="" />
                 </div>
                 <div className="shipping_content">
-                  <h3>Safe Payment</h3>
-                  <p>
-                    With our payment gateway, don’t worry <br /> about your
-                    information
-                  </p>
+                  <h3>{t('safe_payment')}</h3>
+                  <p>{t('safe_payment_desc')}</p>
                 </div>
               </div>
             </div>
@@ -57,17 +55,67 @@ const Home =()=> {
                   <img src={shipping3} alt="" />
                 </div>
                 <div className="shipping_content">
-                  <h3>Friendly Services</h3>
-                  <p>
-                    You have 30-day return guarantee for <br /> every single
-                    order
-                  </p>
+                  <h3>{t('friendly_service')}</h3>
+                  <p>{t('friendly_service_desc')}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+       <div class="about_gallery_section">
+        <div class="container">
+            <div class="about_gallery_container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <article class="single_gallery_section">
+                            <figure>
+                                <div class="gallery_thumb">
+                                    <img src="assets/img/about/about2.jpg" alt=""/>
+                                </div>
+                                <figcaption class="about_gallery_content">
+                                    <h3>What do we do?</h3>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                        veritatis et quasi architecto</p>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <article class="single_gallery_section">
+                            <figure>
+                                <div class="gallery_thumb">
+                                    <img src="assets/img/about/about3.jpg" alt=""/>
+                                </div>
+                                <figcaption class="about_gallery_content">
+                                    <h3>Our Mission</h3>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                        veritatis et quasi architecto</p>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <article class="single_gallery_section">
+                            <figure>
+                                <div class="gallery_thumb">
+                                    <img src="assets/img/about/about4.jpg" alt=""/>
+                                </div>
+                                <figcaption class="about_gallery_content">
+                                    <h3>History Of Us</h3>
+                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+                                        veritatis et quasi architecto</p>
+                                </figcaption>
+                            </figure>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       <div className="banner_area">
         <div className="container">
           <div className="row">
@@ -78,10 +126,8 @@ const Home =()=> {
                     <img src={banner1} alt="" />
                   </a>
                   <div className="banner_content">
-                    <h3>Big Sale Products</h3>
-                    <h2>
-                      Plants <br /> For Interior
-                    </h2>
+                    <h3>{t('single_banner_1')}</h3>
+                    <h2>{t('single_banner_1_desc')}</h2>
                     <a href="#">Shop Now</a>
                   </div>
                 </div>
@@ -94,10 +140,8 @@ const Home =()=> {
                     <img src={banner2} alt="" />
                   </a>
                   <div className="banner_content">
-                    <h3>Top Products</h3>
-                    <h2>
-                      Plants <br /> For Healthy
-                    </h2>
+                    <h3>{t('single_banner_2')}</h3>
+                    <h2>{t('single_banner_2_desc')}</h2>
                     <a href="#">Shop Now</a>
                   </div>
                 </div>

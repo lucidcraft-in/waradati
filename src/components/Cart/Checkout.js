@@ -110,8 +110,8 @@ const Checkout = () => {
       const cartTotalFunc = () => {
         let subTotal = 0;
 
-        if (cartLists.item?.length > 0) {
-          cartLists.item.map((cart) => {
+        if (cartLists?.item?.length > 0) {
+          cartLists?.item.map((cart) => {
             subTotal = subTotal + cart.quantity * cart.sellingPrice;
           });
           setCartSubTotal(subTotal);
@@ -149,7 +149,7 @@ const Checkout = () => {
           dispatch(createOrder(data));
   }
   
-  if (cartLists._id != undefined && setCalculateTotal === false) {
+  if (cartLists?._id != undefined && setCalculateTotal === false) {
     setCalculateTotalFn(true);
      cartTotalFunc();
   }  
@@ -372,7 +372,7 @@ const Checkout = () => {
                           <td>
                             {' '}
                             Price{' '}
-                            <strong> ({cartLists.item?.length} Items) </strong>
+                            <strong> ({cartLists?.item?.length} Items) </strong>
                           </td>
                           <td> AED&nbsp;{cartAmount}</td>
                         </tr>
@@ -433,8 +433,8 @@ const Checkout = () => {
                       >
                         <div className="card-body1">
                           <p>
-                            Pay via PayPal; you can pay with your credit card if
-                            you don’t have a PayPal account.
+                            There is only cash on delivery available at the
+                            moment
                           </p>
                         </div>
                       </div>

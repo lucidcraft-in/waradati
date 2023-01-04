@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'swiper';
+import { useTranslation } from 'react-i18next';
 
 import { topSellingProductsList } from '../../actions/homePageActions';
 import SingleProduct from './SingleProduct';
@@ -12,6 +13,7 @@ import 'swiper/css/pagination';
 import './products.css';
 
 const TopSellingProducts = () => {
+    const { t } = useTranslation();
 
     const dispatch = useDispatch();
 
@@ -31,7 +33,7 @@ const TopSellingProducts = () => {
           <div className="row">
             <div className="col-12">
               <div className="section_title">
-                <h2>Top Selling</h2>
+                <h2>{t('top_selling')}</h2>
               </div>
             </div>
           </div>

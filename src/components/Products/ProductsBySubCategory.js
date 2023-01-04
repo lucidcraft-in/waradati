@@ -8,7 +8,7 @@ import Breadcrumb from '../Common/Breadcrumb';
 import Footer from '../Layout/Footer';
 import ProductFilter from '../Products/ProductFilter';
 import Product from './Product';
-
+import Spinner from '../Common/Spinner';
 import { listProductsSubCategory } from '../../actions/productActions';
 
 const ProductsBySubCategory = () => {
@@ -20,7 +20,7 @@ const ProductsBySubCategory = () => {
   const [priceRange, setPriceRange] = useState('');
   const [priceSort, setPriceSort] = useState('');
 
-  const productList = useSelector((state) => state.productList);
+  const productList = useSelector((state) => state.productListSubCategory);
   const { loading, error, products } = productList;
 
   useEffect(() => {
@@ -57,11 +57,20 @@ const ProductsBySubCategory = () => {
     navigate(result);
   };
 
+   const setUrlOnFilter = (e, sort = false, filter = false) => {
+     if (sort === true) setPriceSort(e.target.value);
+
+     if (filter === true) setPriceRange(e.target.value);
+
+     setToUrl();
+   };
+
  
 
   return (
     <div>
       {' '}
+      {loading === true ? <Spinner /> : ''}
       <NavBar />
       <div className="breadcrumbs_area">
         <div className="container">
@@ -92,22 +101,6 @@ const ProductsBySubCategory = () => {
                     data-bs-toggle="tooltip"
                     title="3"
                   ></button>
-
-                  <button
-                    data-role="grid_4"
-                    type="button"
-                    className=" btn-grid-4"
-                    data-bs-toggle="tooltip"
-                    title="4"
-                  ></button>
-
-                  <button
-                    data-role="grid_list"
-                    type="button"
-                    className="btn-list"
-                    data-bs-toggle="tooltip"
-                    title="List"
-                  ></button>
                 </div>
                 <div className=" niceselect_option">
                   <form className="select_option" action="#">
@@ -123,13 +116,18 @@ const ProductsBySubCategory = () => {
                   </form>
                 </div>
                 <div className="page_amount">
-                  <p>Showing 1–9 of 21 results</p>
+                  <p>Showing {products?.length} results</p>
                 </div>
               </div>
+              {products?.length != 0 ? (
+                <div className="row shop_wrapper">{allProducts}</div>
+              ) : (
+                <div className="alert alert-warning" role="alert">
+                  No data available!
+                </div>
+              )}
 
-              <div className="row shop_wrapper">{allProducts}</div>
-
-              <div className="shop_toolbar t_bottom">
+              {/* <div className="shop_toolbar t_bottom">
                 <div className="pagination">
                   <ul>
                     <li className="current">1</li>
@@ -147,10 +145,10 @@ const ProductsBySubCategory = () => {
                     </li>
                   </ul>
                 </div>
-              </div>
+              </div> */}
             </div>
             <ProductFilter
-              setPriceRange={setPriceRange}
+              setUrlOnFilter={setUrlOnFilter}
               clearFilter={clearFilter}
             />
           </div>

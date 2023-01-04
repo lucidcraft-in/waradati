@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
- 
+ import { useTranslation } from 'react-i18next';
 
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
@@ -21,6 +21,9 @@ import ImageArea from './ImageArea';
 import RelatedProducts from './RelatedProducts';
 
 const ProductDetails = () => {
+
+  const { t } = useTranslation();
+  
   const { id } = useParams();
   const dispatch = useDispatch();
   const myRef = useRef(null);
@@ -186,7 +189,7 @@ const ProductDetails = () => {
                     <p>{product.description}</p>
                   </div>
                   <div className="widget_list widget_manu ">
-                    <h3>STOCKS</h3>
+                    <h3>{t('stocks')}</h3>
                     <ul>
                       {product.stock_items &&
                         product?.stock_items.map((stock) => (
@@ -212,7 +215,7 @@ const ProductDetails = () => {
                     </ul>
                   </div>
                   <div className="product_variant quantity">
-                    <label>quantity</label>
+                    <label>{t('quantity')}</label>
                     <input
                       min="1"
                       max="100"
@@ -222,11 +225,11 @@ const ProductDetails = () => {
                     />
                     {itemAddedInCart === false ? (
                       <button className="button" onClick={(e) => addToCart(e)}>
-                        add to cart
+                        {t('add_to_cart')}
                       </button>
                     ) : (
                       <Link to="/cart">
-                        <button className="button">Go to cart</button>
+                        <button className="button">{t('go_to_cart')}</button>
                       </Link>
                     )}
                   </div>
@@ -237,14 +240,14 @@ const ProductDetails = () => {
                           onClick={(e) => addWishListUser()}
                           title="Add to wishlist"
                         >
-                          + Add to Wishlist
+                          + {t('add_to_wishlist')}
                         </a>
                       </li>
                     </ul>
                   </div>
                   <div className="product_meta">
                     <span>
-                      Brand: <a>{product.brand}</a>
+                      {t('brand')}: <a>{product.brand}</a>
                     </span>
                   </div>
                 </form>

@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCart  } from '../../actions/cartActions';
-export default function CartItem({ cartLists, cart, deleteHandler, }) {
+import { addCart } from '../../actions/cartActions';
+import { useNavigate } from 'react-router-dom';
+
+export default function CartItem({ cartLists, cart, deleteHandler, setQntyChanged }) {
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
   const [quantity, setQuantity] = useState(cart.quantity);
   const [price, setPrice] = useState(cart.sellingPrice);
-  
-    const userLogin = useSelector((state) => state.userLogin);
+
+  const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  
 
-    const addToCart = (e, product) => {
+  const addToCart = (e, product) => {
+    setQuantity(e.target.value);
 
-        setQuantity(e.target.value);
- 
-        let data = {
-          userId: userInfo._id,
-          item: {
-            itemId: product.itemId,
-            quantity: e.target.value,
-            itemName: product.itemName,
-            stockId: product.stockId,
-          },
-        };
-           
-       
-          dispatch(addCart(data));
-      }
-      
+    let data = {
+      userId: userInfo._id,
+      item: {
+        itemId: product.itemId,
+        quantity: e.target.value,
+        itemName: product.itemName,
+        stockId: product.stockId,
+      },
+    };
+
+    dispatch(addCart(data));
+
+    setQntyChanged(e.target.value);
+  };
+
   return (
     <tr>
       <td className="product_remove">

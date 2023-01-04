@@ -150,14 +150,14 @@ const ProductByCategoryList = () => {
                   </form>
                 </div>
                 <div className="page_amount">
-                  <p>Showing 1–9 of 21 results</p>
+                  <p>Showing {products?.length} results</p>
                 </div>
               </div>
               {products?.length != 0 ? (
                 <span>
                   <div className="row shop_wrapper ">{allProducts}</div>
 
-                  <div className="shop_toolbar t_bottom">
+                  {/* <div className="shop_toolbar t_bottom">
                     <div className="pagination">
                       <ul>
                         <li className="current">1</li>
@@ -175,11 +175,11 @@ const ProductByCategoryList = () => {
                         </li>
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
                 </span>
               ) : (
                 <div className="alert alert-warning" role="alert">
-                 No data available!
+                  No data available!
                 </div>
               )}
             </div>

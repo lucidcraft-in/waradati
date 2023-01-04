@@ -60,6 +60,8 @@ export const listProductsSubCategory = (id) => async (dispatch) => {
 
     const { data } = await Axios.get(`/api/products/subcategory/${id}?`);
 
+   
+
     dispatch({
       type: PRODUCT_LIST_BY_SUB_CATEGORY_SUCCESS,
       payload: data,

@@ -1,6 +1,9 @@
-
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
+import { useTranslation } from 'react-i18next';
+import cookies from 'js-cookie';
+
 import './App.css';
 import 'antd/dist/antd.css';
 
@@ -21,10 +24,32 @@ import ProductByCategoryList from './components/Products/ProductByCategoryList';
 
 import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
-import OrderDetails from './components/Account/OrderDetails'
-import Contact from './components/Home/Contact'
+import OrderDetails from './components/Account/OrderDetails';
+import Contact from './components/Home/Contact';
 import AboutUs from './components/Home/AboutUs';
 function App() {
+  const languages = [
+    {
+      code: 'en',
+      name: 'English',
+      country_code: 'gb',
+    },
+    {
+      code: 'ar',
+      name: 'العربية',
+      dir: 'rtl',
+      country_code: 'sa',
+    },
+  ];
+
+  const currentLanguageCode = cookies.get('i18next') || 'en';
+  const currentLanguage = languages.find((l) => l.code === currentLanguageCode);
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    document.body.dir = currentLanguage.dir || 'ltr';
+    document.title = t('app_title');
+  }, [currentLanguage, t]);
   return (
     <>
       <Router>

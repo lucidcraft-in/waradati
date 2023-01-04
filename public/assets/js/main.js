@@ -361,7 +361,7 @@
 
     /*---  ScrollUp Active ---*/
     $.scrollUp({
-      scrollText: '<i class="bi bi-1-circle"></i>',
+      scrollText: '<i class="fa fa-angle-double-up"></i>',
       easingType: 'linear',
       scrollSpeed: 900,
       animation: 'fade',

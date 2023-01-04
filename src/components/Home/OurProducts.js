@@ -2,6 +2,7 @@ import React,{useEffect} from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Pagination } from 'swiper';
+import { useTranslation } from 'react-i18next';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -13,6 +14,9 @@ import SingleProduct from './SingleProduct';
 import { listProductsByCAtegoryPriority } from '../../actions/productActions';
 
 const OurProducts = () => {
+
+  const { t } = useTranslation();
+  
   const dispatch = useDispatch();
   
   
@@ -34,7 +38,7 @@ const OurProducts = () => {
             <div className="col-12">
               <div className="product_header">
                 <div className="section_title">
-                  <h2>Our Products</h2>
+                  <h2>{t('our_products')}</h2>
                 </div>
                 <div className="product_tab_btn">
                   <ul className="nav" role="tablist" id="nav-tab">

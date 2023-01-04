@@ -3,7 +3,13 @@ import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
 import Breadcrumb from '../Common/Breadcrumb';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 export default function Contact() {
+
+  const { t } = useTranslation();
+  
+
   return (
     <div>
       <NavBar />
@@ -20,25 +26,20 @@ export default function Contact() {
             <div className="row">
               <div className="col-lg-12 col-md-12">
                 <div className="contact_message content">
-                  <h3>contact us</h3>
-                  <p>
-                    Beautifully sculpted and nurtured with care, our unique
-                    Juniper bonsai is more than just a tree—it’s an inspired
-                    work of art! One of the most popular of all bonsai
-                    varieties, this exceptional evergreen provides a sense of
-                    calm and serenity, and with proper attention it
-                  </p>
+                  <h3>{t('contact_us')}</h3>
+
                   <ul>
                     <li>
-                      <i className="fa fa-fax"></i> Dubai
+                      <i className="fa fa-fax"></i> {t('dubai')}
                     </li>
                     <li>
                       <i className="fa fa-phone"></i>{' '}
-                      <a href="#">wardathi@gmail.com</a>
+                      <a href="tel:+971 52 450 0355">+971 52 450 0355</a>{' '}
                     </li>
                     <li>
                       <i className="fa fa-envelope-o"></i>
-                      <a href="tel:0123456789">0123456789</a>{' '}
+
+                      <a href="#">wardathi@gmail.com</a>
                     </li>
                   </ul>
                 </div>

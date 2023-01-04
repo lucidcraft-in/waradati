@@ -20,6 +20,7 @@ import {
   productDetailsReducer,
   productByCategoryPriorityHomeListReducer,
   nearestProductsReducer,
+  productListSubCategoryReducer,
 } from './reducers/productReducer';
 import {
   userLoginReducer,
@@ -43,6 +44,7 @@ const reducer = combineReducers({
   categoryList: categoryListReducer,
 
   productList: productListReducer,
+  productListSubCategory : productListSubCategoryReducer,
   productDetails: productDetailsReducer,
   productHome: productByCategoryPriorityHomeListReducer,
   nearestProduct :nearestProductsReducer,

@@ -49,7 +49,7 @@ export default function WishList({ history }) {
    
   ])
   const deleteHandler = (id) => {
-  
+ 
     if (window.confirm('Are you sure')) {
       dispatch(removeWishList(id))
   
@@ -58,6 +58,8 @@ export default function WishList({ history }) {
     
    
   }
+
+
   return (
     <div>
       {' '}

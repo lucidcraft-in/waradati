@@ -3,6 +3,12 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { message } from 'antd';
 
+import i18next from 'i18next';
+import cookies from 'js-cookie';
+import { useTranslation } from 'react-i18next';
+
+ 
+
 import { useDispatch, useSelector } from 'react-redux';
 import $, { map } from 'jquery';
 
@@ -17,6 +23,7 @@ import CartModal from '../Cart/CartModal';
 
 
 const NavBar = () => {
+     const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 const [searchParams, setSearchParams] = useSearchParams();
@@ -27,7 +34,7 @@ const [searchParams, setSearchParams] = useSearchParams();
 
   const [categorySearch, setCategorySearch] = useState('')
   const [searchName, setSearchName] = useState(searchParams.get('spn'));
-
+const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
 
   const cartList = useSelector((state) => state.cartLists);
   const { cartLists } = cartList;
@@ -105,242 +112,100 @@ const [searchParams, setSearchParams] = useSearchParams();
      navigate(url);
   }
  
+
+  const currentLanguageCode = cookies.get('i18next') || 'en';
+  
+ 
  
   return (
     <div>
       {' '}
-      <div className={`off_canvars_overlay ${cartModalActive}`}></div>
+      <div
+        className={`off_canvars_overlay ${cartModalActive} ${openSideBarMobileView}`}
+      ></div>
       <div className="offcanvas_menu">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <div className="canvas_open">
+              <div
+                className="canvas_open"
+                onClick={() => setOpenSideBarMobileView('active')}
+              >
                 <a href="javascript:void(0)">
                   <i className="icon-menu"></i>
                 </a>
               </div>
-              <div className="offcanvas_menu_wrapper">
-                <div className="canvas_close">
+              <div
+                className={`offcanvas_menu_wrapper ${openSideBarMobileView}`}
+              >
+                <div
+                  className="canvas_close"
+                  onClick={() => setOpenSideBarMobileView('')}
+                >
                   <a href="javascript:void(0)">
                     <i className="icon-x"></i>
                   </a>
                 </div>
                 <div className="welcome-text">
-                  <p>Free Delivery: Take advantage of our time to save event</p>
+                  <p> {t('fast_delivery')}</p>
                 </div>
                 <div className="language_currency text-center">
                   <ul>
-                    <li className="currency">
+                    {/* <li className="currency">
                       <a href="#">
                         {' '}
                         AED <i className="fa fa-angle-down"></i>
                       </a>
-                      
-                    </li>
+                    </li> */}
                     <li className="language">
-                      <a href="#">
-                        {' '}
-                        English <i className="fa fa-angle-down"></i>
-                      </a>
-                      <ul className="dropdown_language">
-                        <li>
-                          <a href="#">French</a>
-                        </li>
-                        <li>
-                          <a href="#">Spanish</a>
-                        </li>
-                        <li>
-                          <a href="#">Russian</a>
-                        </li>
-                      </ul>
+                      {currentLanguageCode === 'en' ? (
+                        <a
+                          onClick={() => {
+                            i18next.changeLanguage('ar');
+                          }}
+                        >
+                          {' '}
+                          {t('arabic')}
+                        </a>
+                      ) : (
+                        <a
+                          onClick={() => {
+                            i18next.changeLanguage('en');
+                          }}
+                        >
+                          {' '}
+                          {t('english')}
+                        </a>
+                      )}
                     </li>
                   </ul>
                 </div>
-                {/* <div className="search_container">
-                  <form action="#">
-                    <div className="hover_category">
-                      <select
-                        className="select_option"
-                        name="select"
-                        id="categori2"
-                      >
-                        <option selected value="1">
-                          All  
-                        </option>
-                        <option value="2">Accessories</option>
-                        <option value="3">Accessories & More</option>
-                        <option value="4">Butters & Eggs</option>
-                        <option value="5">Camera & Video </option>
-                        <option value="6">Mornitors</option>
-                        <option value="7">Tablets</option>
-                        <option value="8">Laptops</option>
-                        <option value="9">Handbags</option>
-                        <option value="10">Headphone & Speaker</option>
-                        <option value="11">Herbs & botanicals</option>
-                        <option value="12">Vegetables</option>
-                        <option value="13">Shop</option>
-                        <option value="14">Laptops & Desktops</option>
-                        <option value="15">Watchs</option>
-                        <option value="16">Electronic</option>
-                      </select>
-                    </div>
-                    <div className="search_box">
-                      <input placeholder="Search product..." type="text" />
-                      <button type="submit">
-                        <i className="icon-search"></i>
-                      </button>
-                    </div>
-                  </form>
-                </div> */}
+
                 <div className="call-support">
                   <p>
-                    Call Support: <a href="tel:0123456789">0123456789</a>
+                    {t('call_support')}
+                    <a href="tel:+971 52 450 0355">+971 52 450 0355</a>
                   </p>
                 </div>
                 <div id="menu" className="text-left ">
                   <ul className="offcanvas_main_menu">
                     <li className="menu-item-has-children active">
-                      <a href="#">Home</a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="index.html">Home 1</a>
-                        </li>
-                        <li>
-                          <a href="index-2.html">Home 2</a>
-                        </li>
-                        <li>
-                          <a href="index-3.html">Home 3</a>
-                        </li>
-                        <li>
-                          <a href="index-4.html">Home 4</a>
-                        </li>
-                        <li>
-                          <a href="index-5.html">Home 5</a>
-                        </li>
-                      </ul>
+                      <Link to="/"> {t('home')}</Link>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="#">Shop</a>
-                      <ul className="sub-menu">
-                        <li className="menu-item-has-children">
-                          <a href="#">Shop Layouts</a>
-                          <ul className="sub-menu">
-                            <li>
-                              <a href="#">shop</a>
-                            </li>
-                            <li>
-                              <a href="shop-fullwidth.html">Full Width</a>
-                            </li>
-                            <li>
-                              <a href="shop-fullwidth-list.html">
-                                Full Width list
-                              </a>
-                            </li>
-                            <li>
-                              <a href="shop-right-sidebar.html">
-                                Right Sidebar{' '}
-                              </a>
-                            </li>
-                            <li>
-                              <a href="shop-right-sidebar-list.html">
-                                {' '}
-                                Right Sidebar list
-                              </a>
-                            </li>
-                            <li>
-                              <a href="shop-list.html">List View</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                          <a href="#">other Pages</a>
-                          <ul className="sub-menu">
-                            <li>
-                              <a href="cart.html">cart</a>
-                            </li>
-                            <li>
-                              <a href="wishlist.html">Wishlist</a>
-                            </li>
-                            <li>
-                              <a href="checkout.html">Checkout</a>
-                            </li>
-                            <li>
-                              <a href="my-account.html">my account</a>
-                            </li>
-                            <li>
-                              <a href="404.html">Error 404</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li className="menu-item-has-children">
-                          <a href="#">Product Types</a>
-                          <ul className="sub-menu">
-                            <li>
-                              <a href="product-details.html">product details</a>
-                            </li>
-                            <li>
-                              <a href="product-sidebar.html">product sidebar</a>
-                            </li>
-                            <li>
-                              <a href="product-grouped.html">product grouped</a>
-                            </li>
-                            <li>
-                              <a href="variable-product.html">
-                                product variable
-                              </a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                    <li className="menu-item-has-children active">
+                      <Link to="/about">{t('about_us')}</Link>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="#">blog</a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="blog.html">blog</a>
-                        </li>
-                        <li>
-                          <a href="blog-details.html">blog details</a>
-                        </li>
-                        <li>
-                          <a href="blog-fullwidth.html">blog fullwidth</a>
-                        </li>
-                        <li>
-                          <a href="blog-sidebar.html">blog sidebar</a>
-                        </li>
-                      </ul>
+                    <li className="menu-item-has-children active">
+                      <Link to="/checkout">{t('checkout')}</Link>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="#">pages </a>
-                      <ul className="sub-menu">
-                        <li>
-                          <a href="about.html">About Us</a>
-                        </li>
-                        <li>
-                          <a href="services.html">services</a>
-                        </li>
-                        <li>
-                          <a href="faq.html">Frequently Questions</a>
-                        </li>
-                        <li>
-                          <Link to={`/contact`}> contact</Link>
-                        </li>
-                        <li>
-                          <a href="login.html">login</a>
-                        </li>
-                        <li>
-                          <a href="404.html">Error 404</a>
-                        </li>
-                      </ul>
+                    <li className="menu-item-has-children active">
+                      <Link to="/wishlist">{t('wishlist')}</Link>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="my-account.html">my account</a>
+                    <li className="menu-item-has-children active">
+                      <Link to="/account">{t('my_account')}</Link>
                     </li>
-                    <li className="menu-item-has-children">
-                      <a href="about.html">about Us</a>
-                    </li>
-                    <li className="menu-item-has-children">
-                      <Link to={`/contact`}> Contact Us</Link>
+                    <li className="menu-item-has-children active">
+                      <Link to="/contact">{t('contact_us')}</Link>
                     </li>
                   </ul>
                 </div>
@@ -348,7 +213,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                 <div className="offcanvas_footer">
                   <span>
                     <a href="#">
-                      <i className="fa fa-envelope-o"></i> demo@example.com
+                      <i className="fa fa-envelope-o"></i> uaewardati@gmail.com
                     </a>
                   </span>
                   <ul>
@@ -386,44 +251,6 @@ const [searchParams, setSearchParams] = useSearchParams();
       </div>
       <header>
         <div className="main_header">
-          <div className="header_top">
-            <div className="container">
-              <div className="row align-items-center">
-                <div className="col-lg-7 col-md-7">
-                  <div className="welcome-text">
-                    <p>
-                      Free Delivery: Take advantage of our time to save event
-                    </p>
-                  </div>
-                </div>
-                <div className="col-lg-5 col-md-5">
-                  <div className="language_currency text-right">
-                    <ul>
-                      <li className="currency">
-                        <a href="#">
-                          {' '}
-                          AED  
-                        </a>
-                       
-                      </li>
-                      <li className="language">
-                        <a href="#">
-                          {' '}
-                          English <i className="fa fa-angle-down"></i>
-                        </a>
-                        <ul className="dropdown_language">
-                          <li>
-                            <a href="#">Arabic</a>
-                          </li>
-                         
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="header_middle">
             <div className="container">
               <div className="row align-items-center">
@@ -440,17 +267,16 @@ const [searchParams, setSearchParams] = useSearchParams();
                 <div className="col-lg-9 col-md-6 col-6">
                   <div className="header_right_info">
                     <div className="search_container">
-                      <form action='#'>
+                      <form action="#">
                         <div className="hover_category">
                           <select
                             className="select_option"
                             name="categorySearch"
                             value={categorySearch}
                             onChange={(e) => setCategorySearch(e.target.value)}
-                             
                           >
                             <option selected value="">
-                              Select category
+                              {t('select_category')}
                             </option>
                             {categories.map((category) => (
                               <option value={category._id}>
@@ -461,7 +287,11 @@ const [searchParams, setSearchParams] = useSearchParams();
                         </div>
                         <div className="search_box">
                           <input
-                            placeholder="Search product..."
+                            placeholder={
+                              currentLanguageCode === 'en'
+                                ? t('search_product_english')
+                                : t('search_product_arabic')
+                            }
                             type="text"
                             value={searchName}
                             name="searchName"
@@ -482,21 +312,21 @@ const [searchParams, setSearchParams] = useSearchParams();
                           </a>
                           <ul className="dropdown_links">
                             <li>
-                              <Link to="/checkout">Checkout </Link>
+                              <Link to="/checkout">{t('checkout')}</Link>
                             </li>
                             <li>
-                              <Link to="/account">My Account </Link>
+                              <Link to="/account"> {t('my_account')} </Link>
                             </li>
                             <li>
-                              <Link to="/cart">Shopping Cart</Link>
+                              <Link to="/cart">{t('shopping_cart')}</Link>
                             </li>
                             <li>
-                              <Link to="/wishlist">Wishlist</Link>
+                              <Link to="/wishlist">{t('wishlist')}</Link>
                             </li>
                             <li>
                               {/* to="/login" */}
                               <Link onClick={logoutHandler} to="">
-                                Logout
+                                {t('logout')}
                               </Link>
                             </li>
                           </ul>
@@ -531,6 +361,37 @@ const [searchParams, setSearchParams] = useSearchParams();
                         />
                       </div>
                     </div>
+                    <div className="text-align-center">
+                      {' '}
+                      <div className="language_currency text-right">
+                        <ul>
+                          {/* <li className="currency ">
+                        <a href="#">&nbsp; AED</a>
+                      </li> */}
+                          <li className="language  ">
+                            {currentLanguageCode === 'en' ? (
+                              <a
+                                onClick={() => {
+                                  i18next.changeLanguage('ar');
+                                }}
+                              >
+                                {' '}
+                                {t('arabic')}
+                              </a>
+                            ) : (
+                              <a
+                                onClick={() => {
+                                  i18next.changeLanguage('en');
+                                }}
+                              >
+                                {' '}
+                                {t('english')}
+                              </a>
+                            )}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -545,7 +406,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                       className="categories_title"
                       onClick={(e) => setCategoriesModalDisplay(e)}
                     >
-                      <h2 className="categori_toggle">Categories</h2>
+                      <h2 className="categori_toggle"> {t('categories')}</h2>
                     </div>
                     <div
                       className="categories_menu_toggle"
@@ -571,15 +432,15 @@ const [searchParams, setSearchParams] = useSearchParams();
                                     <Link
                                       to={`/subcategory/products/${subcategory.subCategoryId}`}
                                     >
-                                      {subcategory.name}
+                                      {subcategory.subCategoryName}
                                     </Link>
                                     <ul className="categorie_sub_menu">
                                       {subcategory?.products?.map((product) => (
                                         <li>
                                           <Link
-                                            to={`/product/${product.subCategoryId}`}
+                                            to={`/product/${product.productId}`}
                                           >
-                                            {product.name}
+                                            {product.productName}
                                           </Link>
                                         </li>
                                       ))}
@@ -596,7 +457,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                         <li>
                           <Link to="/categories" id="more-btn">
                             <i className="fa fa-reorder" aria-hidden="true"></i>{' '}
-                            All Categories
+                            {t('all_categories')}
                           </Link>
                         </li>
                       </ul>
@@ -609,7 +470,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                       <ul>
                         <li>
                           <Link className="active" href="/">
-                            home
+                            {t('home')}
                           </Link>
                         </li>
                         {categoryByPriority?.map((category) => {
@@ -630,16 +491,16 @@ const [searchParams, setSearchParams] = useSearchParams();
                                       <Link
                                         to={`/subcategory/products/${subcategory.subCategoryId}`}
                                       >
-                                        {subcategory.name}
+                                        {subcategory.subCategoryName}
                                       </Link>
                                       <ul>
                                         {subcategory?.products?.map(
                                           (product) => (
                                             <li>
                                               <Link
-                                                to={`/product/${product.subCategoryId}`}
+                                                to={`/product/${product.productId}`}
                                               >
-                                                {product.name}
+                                                {product.productName}
                                               </Link>
                                             </li>
                                           )
@@ -654,7 +515,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                         })}
 
                         <li>
-                          <Link to={`/about`}> About Us</Link>
+                          <Link to={`/about`}> {t('about_us')}</Link>
                           {/* <a href="#">
                             pages <i className="fa fa-angle-down"></i>
                           </a> */}
@@ -681,7 +542,7 @@ const [searchParams, setSearchParams] = useSearchParams();
                           </ul> */}
                         </li>
                         <li>
-                          <Link to={`/contact`}> Contact Us</Link>
+                          <Link to={`/contact`}> {t('contact_us')}</Link>
                         </li>
                       </ul>
                     </nav>
@@ -690,7 +551,8 @@ const [searchParams, setSearchParams] = useSearchParams();
                 <div className="col-lg-3">
                   <div className="call-support">
                     <p>
-                      Call Support: <a href="tel:0123456789">0123456789</a>
+                      {t('call_support')}
+                      <a href="tel:+971 52 450 0355">+971 52 450 0355</a>
                     </p>
                   </div>
                 </div>

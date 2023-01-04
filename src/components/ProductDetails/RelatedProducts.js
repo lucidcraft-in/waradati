@@ -3,12 +3,15 @@ import Axios from '../../axios/axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import { Link } from 'react-router-dom';
- import Reviews from '../Common/Reviews';
+import Reviews from '../Common/Reviews';
+  import { useTranslation } from 'react-i18next';
  
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 export default function RelatedProducts({ category }) {
+
+   const { t } = useTranslation();
 
   const [data, setData] = useState()
   
@@ -33,7 +36,7 @@ setData(data.products);
         <div className="row">
           <div className="col-12">
             <div className="section_title">
-              <h2>Related Products </h2>
+              <h2>{t('related_product')} </h2>
             </div>
           </div>
         </div>
