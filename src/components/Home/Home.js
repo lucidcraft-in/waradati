@@ -15,7 +15,7 @@ import shipping3 from './img/shipping3.jpg';
 
 import banner1 from './img/banner1.jpg';
 import banner2 from './img/banner2.jpg';
-
+import WhatsApp from './Whatsapp';
 const Home = () => {
   
   const { t } = useTranslation();
@@ -156,6 +156,7 @@ const Home = () => {
       {/* <Testimonials /> */}
       <TrendingProducts />
       <Footer />
+      <WhatsApp />
     </div>
   );
 }

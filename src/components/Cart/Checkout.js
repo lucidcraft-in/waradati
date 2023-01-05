@@ -51,7 +51,8 @@ const Checkout = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-    useEffect(() => {
+  useEffect(() => {
+   
       dispatch(addressListByUser(userInfo._id));
       dispatch(cartListByUser(userInfo._id));
 
@@ -63,6 +64,7 @@ const Checkout = () => {
       if (orderCreateSuccess === true) {
         setShow(true);
       }
+      
       cartTotalFunc();
     }, [userInfo, success, orderCreateSuccess]);
 

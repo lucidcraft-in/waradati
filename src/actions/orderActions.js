@@ -9,7 +9,8 @@ import {
   
     ORDER_DETAILS_REQUEST,
     ORDER_DETAILS_SUCCESS,
-    ORDER_DETAILS_FAIL,
+  ORDER_DETAILS_FAIL,
+  ORDER_CREATE_RESET
 } from '../constants/orderConstants';
 
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants';
@@ -68,6 +69,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       type: CART_CLEAR_ITEMS,
       payload: data,
     });
+    
     localStorage.removeItem('cartItems');
   } catch (error) {
     const message =
@@ -83,6 +85,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
     });
   }
 };
+export const createOrderReset = (order) => async (dispatch, getState) => { 
+  dispatch({
+    type: ORDER_CREATE_REQUEST,
+  });
+}
 export const getOrderById = (id) => async (dispatch, getState) => {
     try {
         dispatch({ type: ORDER_DETAILS_REQUEST });

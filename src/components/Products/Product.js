@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import { Link } from 'react-router-dom';
  import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,16 +8,16 @@ import { addWishList } from '../../actions/wishlistAction';
 import ProductModal from './ProductModal';
  
  import Reviews from '../Common/Reviews';
-
+ import { message } from 'antd';
 const Product = ({ product }) => {
   const dispatch = useDispatch();
-  
+
     const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  
+
   const [selectedProduct , setSelectedProduct] =useState({})
 
-  
+
   const addToCart = (product) => {
       
     let data = {
@@ -31,7 +31,17 @@ const Product = ({ product }) => {
     };
        
    
-      dispatch(addCart(data));
+    dispatch(addCart(data)).then((res) => {
+      message.loading('Cart item adding...', 1);
+      setTimeout(() => {
+        if (res.code === 200) {
+          message.success('Cart added');
+        } else {
+          message.error('Please try once', 3);
+        }
+      }, 1000);
+    });
+      
   }
   
   const addWishListUser = (product) => {
@@ -39,7 +49,20 @@ const Product = ({ product }) => {
       userId: userInfo._id,
       itemId: product,
     };
-    dispatch(addWishList(data));
+
+    dispatch(addWishList(data)).then((res) => {
+     
+      message.loading('wishlist item adding...', 1);
+      setTimeout(() => {
+       
+        if (res.code === 200) {
+          message.success('Wishlist added');
+        } else {
+          message.error('Please try once', 3);
+        }
+      }, 1000);
+    });
+   
   };
 
   

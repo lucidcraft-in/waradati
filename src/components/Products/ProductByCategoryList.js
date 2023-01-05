@@ -11,7 +11,7 @@ import ProductFilter from '../Products/ProductFilter';
 
  import { listProductsCategory } from '../../actions/productActions';
 import Spinner from '../Common/Spinner';
- 
+
 
 const ProductByCategoryList = () => {
 
@@ -27,11 +27,16 @@ const ProductByCategoryList = () => {
    const productList = useSelector((state) => state.productList);
    const { loading, error, products } = productList;
 
+   const cartCreate = useSelector((state) => state.cartCreate);
+   const { success:cartCreateSuccess } = cartCreate;
   useEffect(() => {
     dispatch(listProductsCategory(id));
   
+    if (cartCreateSuccess) {
+      navigate('/category/products/'+id)
+    }
     if (priceRange || priceSort || searchParams.get('spn')) setToUrl();
-  }, [priceRange, priceSort, id, searchParams.get('spn')]);
+  }, [cartCreateSuccess,priceRange, priceSort, id, searchParams.get('spn')]);
   
   let allProducts = products?.map((product) => <Product product={product} />);
 

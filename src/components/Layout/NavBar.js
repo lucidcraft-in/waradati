@@ -62,6 +62,8 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
     success: success,
   } = cartDelete;
 
+  const cartCreate = useSelector((state) => state.cartCreate);
+  const { success:cartCreateSuccess } = cartCreate;
   useEffect(() => {
 
     if (success) {
@@ -76,7 +78,7 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
 
    
 
-  }, [dispatch, success]);
+  }, [dispatch, success,cartCreateSuccess]);
 
    
 
@@ -100,6 +102,7 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
   };
 
   const searchHere = (e) => {
+ 
     e.preventDefault();
 
     if (categorySearch === '') {
@@ -110,6 +113,8 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
         let url = `/category/products/${categorySearch}?spn=${searchName}`;
 
      navigate(url);
+    
+    
   }
  
 

@@ -44,6 +44,7 @@ export const wishlIstListByUser = (id) => async (dispatch, getState) => {
 };
 
 export const addWishList = (wishList) => async (dispatch, getState) => {
+
   try {
     dispatch({type: WISHLIST_CREATE_REQUEST });
     const {
@@ -57,7 +58,10 @@ export const addWishList = (wishList) => async (dispatch, getState) => {
     };
 
     const { data } = await Axios.post(`/api/wishlist`, wishList, config);
+   
     dispatch({ type: WISHLIST_CREATE_SUCCESS, payload: data });
+    return data;
+
   } catch (error) {
     const message =
       error.response && error.response.data.message

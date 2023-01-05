@@ -27,6 +27,7 @@ import SignUp from './components/Auth/SignUp';
 import OrderDetails from './components/Account/OrderDetails';
 import Contact from './components/Home/Contact';
 import AboutUs from './components/Home/AboutUs';
+
 function App() {
   const languages = [
     {
