@@ -292,11 +292,7 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
                         </div>
                         <div className="search_box">
                           <input
-                            placeholder={
-                              currentLanguageCode === 'en'
-                                ? t('search_product_english')
-                                : t('search_product_arabic')
-                            }
+                            placeholder={t('search_products')}
                             type="text"
                             value={searchName}
                             name="searchName"
@@ -474,7 +470,7 @@ const [openSideBarMobileView, setOpenSideBarMobileView] = useState('');
                     <nav>
                       <ul>
                         <li>
-                          <Link className="active" href="/">
+                          <Link className="active" to="/">
                             {t('home')}
                           </Link>
                         </li>

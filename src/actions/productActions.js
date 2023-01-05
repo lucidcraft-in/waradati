@@ -24,17 +24,15 @@ import {
 import { logout } from './userActions';
  
 
-export const listProductsCategory = (id) => async (
+export const listProductsCategory = (id, count) => async (
   dispatch
 ) => {
   try {
-  
+     
     dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
  
-    const { data } = await Axios.get(
-      `/api/products/category/${id}`
-    );
-    console.log(data);
+    const { data } = await Axios.get(`/api/products/category/${id}/${count}`);
+ 
     
    
  

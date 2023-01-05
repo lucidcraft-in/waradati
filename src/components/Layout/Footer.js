@@ -37,9 +37,9 @@ export default function Footer() {
                 <div className="col-lg-4 col-md-5">
                   <div className="widgets_container widget_app">
                     <div className="footer_logo">
-                      <a href="index.html">
+                      <Link to="/">
                         <img src="assets/img/logo/logo-w.png" alt="" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="footer_widgetnav_menu">
                       <ul>

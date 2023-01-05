@@ -4,8 +4,7 @@ export default function ProductModal({ product }) {
   const [productData, setProductData] = useState([]);
    const [images, setImages] = useState([]);
  
-  console.log("dataaaaaaaaaaaaa");
-  console.log(product);
+ 
     if (
       Object.keys(product).length !== 0 &&
       productData.length === 0 &&

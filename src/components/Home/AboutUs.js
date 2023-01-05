@@ -1,8 +1,9 @@
 import React from 'react';
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
-import Breadcrumb from '../Common/Breadcrumb';
+ 
 import { useTranslation } from 'react-i18next';
+import { useNavigate, Link } from 'react-router-dom';
 export default function AboutUs() {
 
   const { t } = useTranslation();
@@ -10,7 +11,22 @@ export default function AboutUs() {
   return (
     <div>
       <NavBar />
-      <Breadcrumb />
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
+                <ul>
+                  <li>
+                    <Link to="/">home</Link>
+                  </li>
+                  <li>About Us </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         <section className="about_section">
           <div className="container">

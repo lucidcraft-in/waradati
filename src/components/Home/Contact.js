@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../Layout/NavBar';
 import Footer from '../Layout/Footer';
-import Breadcrumb from '../Common/Breadcrumb';
+ 
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,22 @@ export default function Contact() {
   return (
     <div>
       <NavBar />
-      <Breadcrumb />
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
+                <ul>
+                  <li>
+                    <Link to="/">home</Link>
+                  </li>
+                  <li>Contact Us </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>
         {/* =====map======= */}
         <div className="contact_map mt-100">

@@ -23,14 +23,15 @@ const ProductByCategoryList = () => {
   const [priceRange, setPriceRange] = useState('')
   const [priceSort, setPriceSort] = useState(searchParams.get('price_range'));
   const [searchCategory, setSearchCategory] = useState(searchParams.get('spn'));
+   const [countForSkip, setCountForSkip] = useState(0);
 
    const productList = useSelector((state) => state.productList);
-   const { loading, error, products } = productList;
+   const { loading, error, products, pages } = productList;
 
    const cartCreate = useSelector((state) => state.cartCreate);
    const { success:cartCreateSuccess } = cartCreate;
   useEffect(() => {
-    dispatch(listProductsCategory(id));
+    dispatch(listProductsCategory(id, countForSkip));
   
     if (cartCreateSuccess) {
       navigate('/category/products/'+id)
@@ -41,7 +42,7 @@ const ProductByCategoryList = () => {
   let allProducts = products?.map((product) => <Product product={product} />);
 
  
-  
+ 
 
   const setToUrl = () => {
       
@@ -67,9 +68,9 @@ const ProductByCategoryList = () => {
 
     
    
-    
+   
  
-    dispatch(listProductsCategory(`${id}${result}`));
+    dispatch(listProductsCategory(`${id}${result}`, countForSkip));
     
       navigate(result);
   }
@@ -90,6 +91,8 @@ const ProductByCategoryList = () => {
       setToUrl();
 }
    
+  
+let pageCount = 1;
   
   return (
     <div>
@@ -162,25 +165,31 @@ const ProductByCategoryList = () => {
                 <span>
                   <div className="row shop_wrapper ">{allProducts}</div>
 
-                  {/* <div className="shop_toolbar t_bottom">
+                  <div className="shop_toolbar t_bottom">
                     <div className="pagination">
                       <ul>
-                        <li className="current">1</li>
-                        <li>
-                          <a href="#">2</a>
-                        </li>
-                        <li>
-                          <a href="#">3</a>
-                        </li>
-                        <li className="next">
+                       
+                        {
+                          
+                          Array.from(Array(pages), (e, i) => {
+                          
+                          return (
+                            <li onClick={(e) => setCountForSkip(pageCount*2)}>
+                              <a href="#">{pageCount++}</a>
+                            </li>
+                          );
+                        })}
+                       
+                      
+                        {/* <li className="next">
                           <a href="#">next</a>
                         </li>
                         <li>
                           <a href="#"></a>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
-                  </div> */}
+                  </div>
                 </span>
               ) : (
                 <div className="alert alert-warning" role="alert">

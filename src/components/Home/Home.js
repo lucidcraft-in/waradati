@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { listCategories } from '../../actions/categoryActions';
+import { Link } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
 import NavBar from '../Layout/NavBar';
 import Slider from './Slider';
 import OurProducts from './OurProducts';
@@ -19,6 +22,18 @@ import WhatsApp from './Whatsapp';
 const Home = () => {
   
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+     const categoryList = useSelector((state) => state.categoryList);
+     const { categories } = categoryList;
+  
+  useEffect(() => {
+   dispatch(listCategories());
+  
+  
+  }, [])
+
+ 
   
   return (
     <div>
@@ -63,59 +78,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-       <div class="about_gallery_section">
-        <div class="container">
-            <div class="about_gallery_container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <article class="single_gallery_section">
-                            <figure>
-                                <div class="gallery_thumb">
-                                    <img src="assets/img/about/about2.jpg" alt=""/>
-                                </div>
-                                <figcaption class="about_gallery_content">
-                                    <h3>What do we do?</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                        veritatis et quasi architecto</p>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <article class="single_gallery_section">
-                            <figure>
-                                <div class="gallery_thumb">
-                                    <img src="assets/img/about/about3.jpg" alt=""/>
-                                </div>
-                                <figcaption class="about_gallery_content">
-                                    <h3>Our Mission</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                        veritatis et quasi architecto</p>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <article class="single_gallery_section">
-                            <figure>
-                                <div class="gallery_thumb">
-                                    <img src="assets/img/about/about4.jpg" alt=""/>
-                                </div>
-                                <figcaption class="about_gallery_content">
-                                    <h3>History Of Us</h3>
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                        veritatis et quasi architecto</p>
-                                </figcaption>
-                            </figure>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
       <div className="banner_area">
         <div className="container">
           <div className="row">
@@ -146,6 +109,39 @@ const Home = () => {
                   </div>
                 </div>
               </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shop_by_category">
+        <div class="container">
+          <div class="about_gallery_container">
+            <div class="row">
+              {' '}
+              <h3 className="mb-5"> Shop by category</h3>
+              {categories &&
+                categories?.map((category) => (
+                  //
+                  <div class="col-3 ">
+                    <Link to={`/category/products/${category._id}`}>
+                      <article class="single_gallery_section">
+                        <figure>
+                          <div class="gallery_thumb">
+                            <img
+                              src={category.image}
+                              alt=""
+                              className="border-radius-25"
+                            />
+                          </div>
+                          <figcaption class="about_gallery_content">
+                            <h3>{category.categoryName}</h3>
+                          </figcaption>
+                        </figure>
+                      </article>
+                    </Link>
+                  </div>
+                  //
+                ))}
             </div>
           </div>
         </div>

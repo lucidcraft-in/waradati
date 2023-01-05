@@ -24,11 +24,24 @@ const OrderDetails = () => {
   return (
     <div>
       <NavBar />
-      <Breadcrumb />
-          <div className="row single-order-bg">
-              
+      <div className="breadcrumbs_area">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="breadcrumb_content">
+                <ul>
+                  <li>
+                    <Link to="/">home</Link>
+                  </li>
+                  <li>Order </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <Footer />
+        </div>
+      </div>
+      <div className="row single-order-bg"></div>
+      <Footer />
     </div>
   );
 };
