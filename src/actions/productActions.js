@@ -31,7 +31,7 @@ export const listProductsCategory = (id, count) => async (
      
     dispatch({ type: PRODUCT_LIST_BY_CATEGORY_REQUEST });
  
-    const { data } = await Axios.get(`/api/products/category/${id}/${count}`);
+    const { data } = await Axios.get(`/api/products/category/${count}/${id}`);
  
     
    
@@ -52,13 +52,13 @@ export const listProductsCategory = (id, count) => async (
   }
 }
 
-export const listProductsSubCategory = (id) => async (dispatch) => {
+export const listProductsSubCategory = (id, count) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_BY_SUB_CATEGORY_REQUEST });
 
-    const { data } = await Axios.get(`/api/products/subcategory/${id}?`);
-
-   
+    const { data } = await Axios.get(
+      `/api/products/subcategory/${count}/${id}?`
+    );
 
     dispatch({
       type: PRODUCT_LIST_BY_SUB_CATEGORY_SUCCESS,

@@ -19,14 +19,15 @@ const ProductsBySubCategory = () => {
 
   const [priceRange, setPriceRange] = useState('');
   const [priceSort, setPriceSort] = useState('');
+   const [countForSkip, setCountForSkip] = useState(0);
 
   const productList = useSelector((state) => state.productListSubCategory);
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProductsSubCategory(id));
+    dispatch(listProductsSubCategory(id, countForSkip));
     if (priceRange || priceSort) setToUrl();
-  }, [priceRange, priceSort, id, searchParams]);
+  }, [priceRange, priceSort, id, searchParams, countForSkip]);
 
   let allProducts = products?.map((product) => <Product product={product} />);
 
@@ -49,7 +50,7 @@ const ProductsBySubCategory = () => {
 
     navigate(result);
 
-    dispatch(listProductsSubCategory(`${id}${result}`));
+    dispatch(listProductsSubCategory(`${id}${result}`, countForSkip));
   };
  
   const clearFilter = () => {
@@ -63,8 +64,9 @@ const ProductsBySubCategory = () => {
      if (filter === true) setPriceRange(e.target.value);
 
      setToUrl();
-   };
-
+  };
+  
+let pageCount = 0;
  
 
   return (
@@ -127,25 +129,19 @@ const ProductsBySubCategory = () => {
                 </div>
               )}
 
-              {/* <div className="shop_toolbar t_bottom">
+              <div className="shop_toolbar t_bottom">
                 <div className="pagination">
                   <ul>
-                    <li className="current">1</li>
-                    <li>
-                      <a href="#">2</a>
-                    </li>
-                    <li>
-                      <a href="#">3</a>
-                    </li>
-                    <li className="next">
-                      <a href="#">next</a>
-                    </li>
-                    <li>
-                      <a href="#"></a>
-                    </li>
+                    {Array.from(Array(pages), (e, i) => {
+                      return (
+                        <li onClick={(e) => setCountForSkip(i * 15)}>
+                          <a href="#">{pageCount++}</a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
-              </div> */}
+              </div>
             </div>
             <ProductFilter
               setUrlOnFilter={setUrlOnFilter}

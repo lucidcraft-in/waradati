@@ -15,7 +15,7 @@ const Product = ({ product }) => {
     const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const [selectedProduct , setSelectedProduct] =useState({})
+  const [selectedProduct , setSelectedProduct] =useState()
 
 
   const addToCart = (product) => {
@@ -74,10 +74,7 @@ const Product = ({ product }) => {
           {/* <Link to="/product"> */}
           <div className="product_thumb">
             {/* <a className="primary_img" href="product-details.html"> */}
-            <img
-              src={`${product.product_items[0].images[0].url}`}
-              alt=""
-            />
+            <img src={`${product.product_items[0].images[0].url}`} alt="" />
             {/* </a> */}
             <div className="label_product">
               <span className="label_sale">-7%</span>
@@ -98,9 +95,9 @@ const Product = ({ product }) => {
                     <i className="icon-heart"></i>
                   </a>
                 </li>
-                <li className="quick_button">
+                {/* <li className="quick_button">
                   <a
-                    onClick={(e) => setSelectedProduct(product)}
+                    onClick={(e) => setSelectedProduct(product.product)}
                     data-bs-toggle="modal"
                     data-bs-target="#modal_box"
                     title="quick view"
@@ -108,7 +105,7 @@ const Product = ({ product }) => {
                     {' '}
                     <i className="icon-eye"></i>
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
             <div className="action_links list_action">
@@ -214,7 +211,7 @@ const Product = ({ product }) => {
           </div>
         </figure>
       </article>
-      <ProductModal product={selectedProduct} />
+      {/* <ProductModal productId={selectedProduct} /> */}
     </div>
   );
 }

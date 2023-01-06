@@ -31,18 +31,28 @@ const ProductByCategoryList = () => {
    const cartCreate = useSelector((state) => state.cartCreate);
    const { success:cartCreateSuccess } = cartCreate;
   useEffect(() => {
+    
     dispatch(listProductsCategory(id, countForSkip));
-  
+
     if (cartCreateSuccess) {
-      navigate('/category/products/'+id)
+      navigate('/category/products/' + id);
     }
     if (priceRange || priceSort || searchParams.get('spn')) setToUrl();
-  }, [cartCreateSuccess,priceRange, priceSort, id, searchParams.get('spn')]);
+  }, [
+    cartCreateSuccess,
+    priceRange,
+    priceSort,
+    id,
+    searchParams.get('spn'),
+    countForSkip,
+  ]);
+
+   
   
   let allProducts = products?.map((product) => <Product product={product} />);
 
  
- 
+
 
   const setToUrl = () => {
       
@@ -92,7 +102,7 @@ const ProductByCategoryList = () => {
 }
    
   
-let pageCount = 1;
+let pageCount = 0;
   
   return (
     <div>
@@ -174,19 +184,14 @@ let pageCount = 1;
                           Array.from(Array(pages), (e, i) => {
                           
                           return (
-                            <li onClick={(e) => setCountForSkip(pageCount*2)}>
+                            <li onClick={(e) => setCountForSkip((i ) * 15)}>
                               <a href="#">{pageCount++}</a>
                             </li>
                           );
                         })}
                        
                       
-                        {/* <li className="next">
-                          <a href="#">next</a>
-                        </li>
-                        <li>
-                          <a href="#"></a>
-                        </li> */}
+                        
                       </ul>
                     </div>
                   </div>
